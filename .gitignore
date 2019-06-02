@@ -1,0 +1,10 @@
+node_modules/
+frontend/build/
+config.yaml
+pywikibot.lwp
+watch.txt
+throttle.ctrl
+__pycache__/
+apicache-py3/
+old_version/
+virtual/

@@ -1,0 +1,17 @@
+https://github.com/sudodoki/react-textarea-highlight
+https://github.com/lonekorean/highlight-within-textarea
+https://www.npmjs.com/package/highlight-within-textarea
+https://github.com/MattX/highlight-within-textarea - jā
+https://sudodoki.github.io/react-textarea-highlight/#/censor
+https://codersblock.com/blog/highlight-text-inside-a-textarea/
+https://github.com/lonekorean/highlight-within-textarea
+
+
+-------------------------
+fix the issue
+improve Wikipedia
+issues
+
+
+---------------------
+rakstus, kuros netika veiktas darbības, atzīmēt par automātiski pārbaudītiem

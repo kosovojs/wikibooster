@@ -1,0 +1,6 @@
+IS_DEV: True
+PORT: 3307
+HOST: localhost
+USER: root
+PASSWORD: 
+DATABASE: yabrr

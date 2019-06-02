@@ -1,0 +1,104 @@
+#taskPageFormat {
+	display: flex;
+	flex-direction: row;
+	margin: 1rem;
+}
+
+#articleListTitle {
+	display: none;
+}
+
+.noActionNeeded {
+	clear:both;
+	padding-top: 10px;
+}
+
+#articleList {
+	//display: block;
+	max-height: calc(100vh - 7rem);
+    overflow-y: auto;
+	//min-width: 300px;
+	width: 350px;
+    border-right: 1px solid #dbd9db;
+    margin-top: 10px;
+	padding-right: 5px;
+	padding-left: 18px;
+}
+
+#taskArea {
+	padding-left: 8px;
+	//display: block;
+	min-width: 800px;
+}
+.currentArticle {
+	cursor: pointer;
+    background-color: #eddd90;
+	word-break: break-all;
+}
+/*
+#articleList {
+    width: 250px;
+    border-right: 1px solid #dbd9db;
+    margin-top: 50px;
+	padding: 20px;
+	height: 100%;
+	overflow-y:scroll;
+}
+*/
+/*
+
+
+color: #212529;
+text-align: left;
+*/
+.articleItem {
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.7;
+	display: block;
+	cursor: pointer;
+    width: 100%;
+	margin: 0px;
+	word-break: break-all;
+}
+
+/*
+.myCard {
+	.title {
+		font-size: 115%;
+		font-weight: bold;
+		cursor: pointer;
+	}
+  
+	.description {
+	  display: block;
+	  padding: 6px 12px;
+	}
+}
+*/
+@media screen and (max-width: 950px) {
+	#taskPageFormat {
+		flex-direction: column-reverse;
+	}
+
+	#articleListTitle {
+		display: inline-block;
+		overflow-y: initial;
+		height: initial;
+	}
+
+	#articleList {
+		width: 100%;
+	}
+}
+
+@media screen and (max-width: 1000px) {
+	#taskArea {
+		min-width: 200px;
+	}
+}
+@media screen and (max-width: 660px) {
+	.btn-group > .btn{
+		display: block;
+	}
+}
