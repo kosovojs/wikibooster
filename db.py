@@ -42,6 +42,11 @@ class DB:
 		#
 		self.cursor = self.conn.cursor()
 
+	def getCurrentTime(self):
+		from time import gmtime, strftime
+		currTime = strftime("%Y-%m-%d %H:%M:%S", gmtime())#'2009-01-05 22:14:39'
+		return currTime
+
 	def run_query(self, sql, params):
 		try:
 			self.cursor.execute(sql, params)
@@ -83,6 +88,14 @@ class DB:
 		
 		return results
 
+	def saveArticlesInDatabase(self,values):
+		currTime = self.getCurrentTime()
+		sqlTemplate = "insert into article_list (article_name, wiki, task, addition_date) values (%s, %s, %s, %s)"
+
+		for entry in values:
+			self.cursor.execute(sqlTemplate, (entry[0],entry[1],entry[2],currTime))
+		self.conn.commit()
+
 	def getArticleForTask(self,task_id,title):
 		sql = "SELECT id FROM article_list WHERE task=%s AND article_name=%s"
 		results = self.run_query(sql, (task_id,title))
@@ -94,9 +107,8 @@ class DB:
 		return results
 
 	def saveStatus(self,task_id,pageTitle, result, user):
-		from time import gmtime, strftime
-		currTime = strftime("%Y-%m-%d %H:%M:%S", gmtime())#'2009-01-05 22:14:39'
-
+		currTime = self.getCurrentTime()
+		
 		sql = "update article_list set completion_date=%s, result=%s, user=%s where article_name=%s and task=%s and completion_date IS NULL"
 
 		affected_rows = self.cursor.execute(sql, (currTime, result, user, pageTitle, task_id))

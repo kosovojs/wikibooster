@@ -27,8 +27,13 @@ export default class Task extends Component {
 	}
 
 	saveArticle = (result) => (event) => {
-		const {articleID, changedText, status} = this.state;
+		const {articleID, changedText, status, isAuth} = this.state;
 		const {task, article} = this.props;
+
+		if (!isAuth) {
+			toast.warn("Jāielogojas, lai saglabātu rakstus!",{autoClose:5000});
+			return;
+		}
 
 		this.setState({savingProcess:true});
 		const dataToSend = {
@@ -60,7 +65,7 @@ export default class Task extends Component {
 		const {task, article} = this.props;
 		console.log(article);
 		
-		this.setState({loading: true});
+		this.setState({loading: true, articleEditing: false});
 
 		//http://127.0.0.1:5000/job/double/Magnolijas
 		fetch(urlendpoint+'task/lvwiki/'+task+'/'+article)
@@ -118,20 +123,20 @@ export default class Task extends Component {
 		return <div>
 			{error ? <div>Notika kļūda</div> : <div>{loading ? <div>Ielādējam datus</div> : <div><h3>{article && article !== '' ? ArticleTitle(article,'lv') : ""}</h3>
 				<div className="btn-group actionButtons" role="group">
-  					<button disabled={savingProcess || !isAuth} type="button" className="btn btn-outline-success" onClick={this.saveArticle('success')}>Saglabāt</button>
-  					<button disabled={savingProcess || !isAuth} type="button" className="btn btn-outline-info" onClick={this.props.goToNextArticle}>Izlaist</button>
- 					<button disabled={savingProcess || !isAuth} type="button" className="btn btn-outline-danger" onClick={this.saveArticle('error')}>Rastā nav nepieciešama darbība</button>
- 					<button disabled={savingProcess || !isAuth} type="button" className="btn btn-outline-info" onClick={this.toggleArticleEditing}>Veikt labojumus rakstā</button>
+  					<button disabled={savingProcess} type="button" className="btn btn-outline-success" onClick={this.saveArticle('success')}>Saglabāt</button>
+  					<button disabled={savingProcess} type="button" className="btn btn-outline-info" onClick={this.props.goToNextArticle}>Izlaist</button>
+ 					<button disabled={savingProcess} type="button" className="btn btn-outline-danger" onClick={this.saveArticle('error')}>Rastā nav nepieciešama darbība</button>
+ 					<button disabled={savingProcess} type="button" className="btn btn-outline-info" onClick={this.toggleArticleEditing}>Veikt labojumus rakstā</button>
 				</div>
-			{status === 'noaction' ? <div className="noActionNeeded">Izskatās, ka šim rakstam nav nepieciešamas nekādas darbības, kas saistītas ar šo uzdevumu (spied "Saglabāt")</div> : <div>{task == '4' ? <div><InfoboxView lv={changedText} en={enFormatted} /></div> : <div><h4>Labojumi</h4>
+			{status === 'noaction' ? <div className="noActionNeeded">Izskatās, ka šim rakstam nav nepieciešamas nekādas darbības, kas saistītas ar šo uzdevumu (spied "Saglabāt")</div> : <div><h4>Labojumi</h4>
 				{origText === changedText ? <div className="noActionNeeded">Netika veiktas izmaiņas</div> : Comparision(origText,changedText)}</div>}
-				{articleEditing || task == '4' ? <div>
+				{articleEditing ? <div>
 				<h4>Labot tekstu</h4>
 				Tev ir iespēja labot tekstu pirms tā saglabāšanas Vikipēdijā:
 				<textarea className="form-control" rows={10}  value={textareaText} onChange={this.handleChange}/>
 				</div> : ""}</div>
 				
-				}</div>}</div>}
+				}</div>}
 		</div>;
 	}
 }

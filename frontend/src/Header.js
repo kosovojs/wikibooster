@@ -10,7 +10,7 @@ const Header = (props) => {
 	const taskList = tasks.map((item, key) => <NavDropdown.Item key={key} href={`#/task/${item.id}`}>{item.navTitle}</NavDropdown.Item>);
 
 return <Navbar expand="lg" bg="dark" variant="dark">
-<Navbar.Brand href="#/">Issues</Navbar.Brand>
+<Navbar.Brand href="#/">WikiBooster</Navbar.Brand>
 <Navbar.Toggle aria-controls="navbar-nav" />
 <Navbar.Collapse id="navbar-nav">
   <Nav className="mr-auto">
@@ -21,9 +21,9 @@ return <Navbar expand="lg" bg="dark" variant="dark">
     <Nav>
 		{isAuth ? <div>
 	<NavDropdown title={`Sveiks, ${userName}!`} id="nav-tasks">
-	<NavDropdown.Item href="/edgarsdev/logout">Iziet</NavDropdown.Item>
+	<NavDropdown.Item href="/booster/logout">Iziet</NavDropdown.Item>
 	</NavDropdown>
-	  </div> : <Nav.Link href="/edgarsdev/login">Ienākt</Nav.Link>}
+	  </div> : <Nav.Link href="/booster/login">Ienākt</Nav.Link>}
     </Nav>
 </Navbar.Collapse>
 </Navbar>;

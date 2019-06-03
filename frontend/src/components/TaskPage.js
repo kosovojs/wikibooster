@@ -80,7 +80,7 @@ export default class TaskPage extends Component {
 	  const {articleId, error, loading, articles} = this.state;
 	  const {id:taskId} = this.props.match.params;
 	  
-    return (<div>{error ? <div>Notika kļūda</div> : <div>{loading ? "Ielādējam datus" : <div>
+    return (<div>{error ? <div>Notika kļūda</div> : <div>{loading ? "Ielādējam datus" : <div>{articles.length> 0 ? <div>
 		<div id="taskPageFormat">
 			<div>
 			<ArticleList handleArticleSelect={this.handleArticleChange} articles={articles} articleId={articleId} />
@@ -89,7 +89,7 @@ export default class TaskPage extends Component {
 		<Task article={articles[articleId]} task={taskId} goToNextArticle={this.goToNextArticle} />
 			</div>
 		</div>
-</div>}</div>}
+	</div> : "Nav neviena raksta!"}</div>}</div>}
 		</div>
 
     );

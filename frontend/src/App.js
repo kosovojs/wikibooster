@@ -6,6 +6,7 @@ import { HashRouter as Router, Route, Switch  } from 'react-router-dom';
 import TaskPage from './components/TaskPage';
 import MainPage from './components/mainPage';
 import Header from './Header';
+import {Footer} from './Footer';
 import {urlendpoint} from './config';
 
 import { ToastContainer } from 'react-toastify';
@@ -61,9 +62,9 @@ class App extends Component {
             draggable={false}
             pauseOnHover
             />
+			{/*<Footer />*/}
 		  </div>
 		</Router>
-
     );
   }
 }

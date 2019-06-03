@@ -28,6 +28,9 @@ class Tasks:
 		elif task=='5':
 			infobox = Infobox()
 			return infobox.getData(self.wiki, article)
+		else:
+			return {'status':'error','message':'No result'}
+		#
 	#
 	def runTests(self):
 		replacements = Replacements()
