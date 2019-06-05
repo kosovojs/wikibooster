@@ -50,14 +50,15 @@ export default class Task extends Component {
 			this.setState({savingProcess:false});
 			console.log('resp no save',data);
 			if (data.status === 'ok' || data.status === 'info') {
-				toast.info('Dati saglabāti', {autoClose:2000});
+				toast.info('Dati saglabāti', {autoClose:3000});
 				this.props.goToNextArticle();
 			} else {
-				toast.warn('Notika kļūda', {autoClose:3500});
+				toast.warn('Notika kļūda', {autoClose:4500});
 			}
 		})
 		.catch(data => {
-			toast.warn('Notika kļūda', {autoClose:3500});
+			this.setState({savingProcess:false});
+			toast.warn('Notika kļūda', {autoClose:4500});
 		});
 	}
 	
@@ -122,6 +123,9 @@ export default class Task extends Component {
 
 		return <div>
 			{error ? <div>Notika kļūda</div> : <div>{loading ? <div>Ielādējam datus</div> : <div><h3>{article && article !== '' ? ArticleTitle(article,'lv') : ""}</h3>
+				{!isAuth && <div className="alert alert-primary" role="alert">
+					Tev ir <a href="//tools.wmflabs.org/booster/login" className="alert-link">jāielogojas</a>, lai saglabātu savas darbības!
+				</div>}
 				<div className="btn-group actionButtons" role="group">
   					<button disabled={savingProcess} type="button" className="btn btn-outline-success" onClick={this.saveArticle('success')}>Saglabāt</button>
   					<button disabled={savingProcess} type="button" className="btn btn-outline-info" onClick={this.props.goToNextArticle}>Izlaist</button>

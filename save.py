@@ -14,18 +14,35 @@ class Save:
 		else:
 			self.csrf_token = ''
 
-	def doSaveAction(self, article, wikitext):
+	def makeSummary(self,taskID):
+		finalSummary = ''
+		mapping = {
+			'1':'pievienots DEFAULTSORT',
+			'2':'divi vienādi vārdi pēc kārtas',
+			'3':'labots typo (sekojošais)',
+			'4':'labots typo (nākošais)'
+		}
+		if taskID in mapping:
+			finalSummary = mapping[taskID] + ' ([[toollabs:booster|booster]])'
+		else:
+			finalSummary = 'veikts labojums ar [[toollabs:booster|booster]] rīku'
+
+		return finalSummary
+
+	def doSaveAction(self, article, wikitext, task):
+		summary = self.makeSummary(task)
 		params = {'action': 'edit',
 					'title':article,
 					'text': wikitext,
-					'summary': 'Edgars testē; ignorējiet :)',
-					'bot': True,
+					'summary': summary,
+					#'bot': True,
 					'contentmodel': 'wikitext',
 					'token': self.csrf_token,
 					'assert': 'user',
 					'maxlag': 5,
-					'formatversion': 2}
-					
+					'formatversion': 2
+		}
+		
 		try:
 			params = params
 			response = self.session.post(**params)
@@ -43,7 +60,7 @@ class Save:
 				print('no need to save')
 			else:
 				print('need to save')
-				#self.doSaveAction(article, wikitext)
+				self.doSaveAction(article, wikitext, job)
 			#simply save to DB result
 		#	return {'status':'ok'}
 		#task_id,pageID, result, user

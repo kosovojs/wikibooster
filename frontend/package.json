@@ -2,7 +2,7 @@
   "name": "yabr",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://tools.wmflabs.org/edgarsdev",
+  "homepage": "https://tools.wmflabs.org/booster",
   "dependencies": {
     "bootstrap": "^4.3.1",
     "node-sass": "^4.12.0",

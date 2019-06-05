@@ -14,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const NotFound = ({ location }) => (
 	<div>
-	  <h3>Did not found page for <code>{location.pathname}</code></h3>
+	  <h3>Netika atrasta <code>{location.pathname}</code> lapa</h3>
 	</div>
 );
 
