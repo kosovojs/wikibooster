@@ -15,3 +15,7 @@ issues
 
 ---------------------
 rakstus, kuros netika veiktas darbības, atzīmēt par automātiski pārbaudītiem
+
+
+----------------
+trigger redux on url change

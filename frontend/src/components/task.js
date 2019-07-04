@@ -19,7 +19,6 @@ export default class Task extends Component {
 			articleEditing: false,
 			savingProcess: false//saglabāšanas process, lai diseiblotu pogas
 		};
-		this.setData = this.setData.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.saveArticle = this.saveArticle.bind(this);
 		this.setAsIncorrect = this.setAsIncorrect.bind(this);
@@ -62,48 +61,17 @@ export default class Task extends Component {
 		});
 	}
 	
-	setData() {
-		const {task, article} = this.props;
-		console.log(article);
-		
-		this.setState({loading: true, articleEditing: false});
-
-		//http://127.0.0.1:5000/job/double/Magnolijas
-		fetch(urlendpoint+'task/lvwiki/'+task+'/'+article)
-		.then(response => response.json())
-		.then(data => {
-			const {status, origText, changedText, articleID, enFormatted} = data;
-
-			const finalStatus = origText == null || changedText == null ? 'noaction' : status;
-			
-			this.setState({article, origText,loading: false,status:finalStatus, changedText, articleID,enFormatted});
-		});
-	}
-
-	checkLoggedIn() {
-		fetch(urlendpoint+'info')
-		.then(response => response.json())
-		.then(data => {
-			const {status} = data;
-			
-			if (status === 'ok') {
-				this.setState({isAuth: true});
-			}
-		});
-	}
-
 	setAsIncorrect() {
 		this.props.goToNextArticle();
 	}
 	
 	componentDidMount() {
-		this.setData();
-		this.checkLoggedIn();
+		this.props.setArticleData();
 	}
 
 	componentDidUpdate(prevProps) {
 		if (this.props.article !== prevProps.article || this.props.task !== prevProps.task) {
-			this.setData();
+			this.props.setArticleData();
 		}
 	}
 
@@ -116,9 +84,10 @@ export default class Task extends Component {
 	}
 
   	render() {
-		const {article, loading, error, origText,changedText, status, savingProcess,articleEditing, isAuth, enFormatted} = this.state;
-		const {task} = this.props;
+		const {article, loading, articleParams: {origText,changedText, status}, articleEditing, isAuth, task} = this.props;
+		const error = false;
 
+		const savingProcess = false;
 		const textareaText = task == '4' ? origText : changedText;
 
 		return <div>
@@ -129,7 +98,7 @@ export default class Task extends Component {
 				<div className="btn-group actionButtons" role="group">
   					<button disabled={savingProcess} type="button" className="btn btn-outline-success" onClick={this.saveArticle('success')}>Saglabāt</button>
   					<button disabled={savingProcess} type="button" className="btn btn-outline-info" onClick={this.props.goToNextArticle}>Izlaist</button>
- 					<button disabled={savingProcess} type="button" className="btn btn-outline-danger" onClick={this.saveArticle('error')}>Rastā nav nepieciešama darbība</button>
+ 					<button disabled={savingProcess} type="button" className="btn btn-outline-danger" onClick={this.saveArticle('error')}>Rakstā nav nepieciešama darbība</button>
  					<button disabled={savingProcess} type="button" className="btn btn-outline-info" onClick={this.toggleArticleEditing}>Veikt labojumus rakstā</button>
 				</div>
 			{status === 'noaction' ? <div className="noActionNeeded">Izskatās, ka šim rakstam nav nepieciešamas nekādas darbības, kas saistītas ar šo uzdevumu (spied "Saglabāt")</div> : <div><h4>Labojumi</h4>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Task from './task';
-import ArticleList from "./articleList";
+import Task from '../containers/Task';
+import ArticleList from "../containers/ArticleList";
 import {urlendpoint} from '../config';
 import './taskPage.scss';
 
@@ -15,7 +15,6 @@ export default class TaskPage extends Component {
 		};
 
 		this.goToNextArticle = this.goToNextArticle.bind(this);
-		this.saveArticleAction = this.saveArticleAction.bind(this);
 		this.handleArticleChange = this.handleArticleChange.bind(this);
 	}
 	
@@ -28,46 +27,17 @@ export default class TaskPage extends Component {
 	goToNextArticle() {
 		const {articles, articleId} = this.state;
 		
-		
 		const newId = (articles.length - articleId === 1) ? 0 : articleId+1;
 		this.setState({articleId:newId});
 	}
-
-	saveArticleAction() {
-		
-	}
-
-	setup() {
-		const {id:task} = this.props.match.params;
-
-		const debug = false;
-		
-		this.setState({loading: true});
-		
-		if (debug) {
-			const articles = ['a','b','b','b','b','b'];
-			const articleId = 0;
 	
-			this.setState({
-				articles,
-				articleId,
-				loading: false,
-				error: false
-			});
-
-		} else {
-			//task/<wiki>/<task_id>/articles
-			fetch(urlendpoint+'task/lvwiki/'+task+'/articles')
-			.then(response => response.json())
-			.then(data => {
-				this.setState({articles:data,loading: false,articleId:0});
-			});
-		}
+	setup() {
+		const {id} = this.props.match.params;
+		this.props.setTask(id);
 	}
 
 	componentDidMount() {
 		this.setup();
-		//this.props.onArticleChange();
 	}
 
 	componentDidUpdate(prevProps) {
@@ -77,16 +47,16 @@ export default class TaskPage extends Component {
 	}
   
   	render() {
-	  const {articleId, error, loading, articles} = this.state;
-	  const {id:taskId} = this.props.match.params;
+	  const {articleId, loading, articles, taskId} = this.props;
+	  const error = false;
 	  
     return (<div>{error ? <div>Notika kļūda</div> : <div>{loading ? "Ielādējam datus" : <div>{articles.length> 0 ? <div>
 		<div id="taskPageFormat">
 			<div>
-			<ArticleList handleArticleSelect={this.handleArticleChange} articles={articles} articleId={articleId} />
+			<ArticleList />
 			</div>
 			<div id="taskArea">
-		<Task article={articles[articleId]} task={taskId} goToNextArticle={this.goToNextArticle} />
+		<Task />
 			</div>
 		</div>
 	</div> : "Nav neviena raksta!"}</div>}</div>}
@@ -95,3 +65,4 @@ export default class TaskPage extends Component {
     );
   }
 }
+// article={articles[articleId]} task={taskId} goToNextArticle={this.goToNextArticle}
