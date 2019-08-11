@@ -4,6 +4,12 @@
 	flex-direction: row;
 }
 
+.wikis {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+}
+
 .myCard {
 	//display: block;
 	min-width: 300px;
@@ -14,16 +20,26 @@
 	margin: 20px;
 }
 
+
 .myCard {
 	.title {
 		font-size: 115%;
 		font-weight: bold;
+	}
+
+	.clickable {
 		cursor: pointer;
 	}
   
 	.description {
 	  display: block;
 	  padding: 6px 12px;
+	}
+
+	.noArticles {
+		float: right;
+		font-size: 85%;
+		font-style: italic;
 	}
 }
 

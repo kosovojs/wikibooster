@@ -14,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const NotFound = ({ location }) => (
 	<div>
-	  <h3>Netika atrasta <code>{location.pathname}</code> lapa</h3>
+	  <h3>Did not foun page <code>{location.pathname}</code></h3>
 	</div>
 );
 
@@ -26,8 +26,8 @@ function App(props) {
 	<Router>
 		  <Header />
 		<Switch>
-		  <Route exact path="/" component={MainPage} />
-		  <Route exact path="/task/:id" component={TaskPage} />
+		  <Route exact path="/:lang?" component={MainPage} />
+		  <Route exact path="/:lang/task/:id" component={TaskPage} />
 		  <Route component={NotFound} />
 		</Switch>
 		<ToastContainer

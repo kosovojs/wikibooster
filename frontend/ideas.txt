@@ -19,3 +19,8 @@ rakstus, kuros netika veiktas darbības, atzīmēt par automātiski pārbaudīti
 
 ----------------
 trigger redux on url change
+- https://stackoverflow.com/questions/32612418/transition-to-another-route-on-successful-async-redux-action/36269830#36269830
+- https://github.com/StephenGrider/ReduxCasts/blob/master/blog/src/components/posts_new.js#L23-L38
+- https://stackoverflow.com/questions/36886506/redux-change-url-when-an-async-action-is-dispatched
+-------------
+sekojošo -> šādu

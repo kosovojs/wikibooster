@@ -6,6 +6,8 @@ export const SET_ARTICLE_LIST_LOADING = 'SET_ARTICLE_LIST_LOADING';
 export const SET_ARTICLE = 'SET_ARTICLE';
 export const SET_ARTICLE_DATA = 'SET_ARTICLE_DATA';
 export const SET_ARTICLE_LOADING = 'SET_ARTICLE_LOADING';
+export const SET_ARTICLE_SAVING = 'SET_ARTICLE_SAVING';
+export const HANDLE_TEXT_CHANGE = 'HANDLE_TEXT_CHANGE';
 
 export const setArticle = ({article, key}) => ({//article - title, key - ID
 	type: SET_ARTICLE,
@@ -13,15 +15,25 @@ export const setArticle = ({article, key}) => ({//article - title, key - ID
 	key
 });
 
-export const setArticleData = ({origText,finalStatus, changedText}) => ({
+export const hadleTextChange = (newText) => ({
+	type: HANDLE_TEXT_CHANGE,
+	newText
+})
+
+export const setArticleData = ({origText,status, changedText}) => ({
 	type: SET_ARTICLE_DATA,
 	payload: {
-		origText,status:finalStatus, changedText
+		origText,status, changedText
 	}
 });
 
 export const setArticleLoading = (status) => ({
 	type: SET_ARTICLE_LOADING,
+	payload: status
+});
+
+export const setArticleSaving = (status) => ({
+	type: SET_ARTICLE_SAVING,
 	payload: status
 });
 
