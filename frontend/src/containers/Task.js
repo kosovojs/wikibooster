@@ -41,7 +41,7 @@ const handleArticleSet = () => {
 		const articleTitle = state.tasks.currentArticle.name;
 		const lang = state.app.wiki;
 
-		return fetch(`${urlendpoint}task/${lang}wiki/${currTask}/${articleTitle}`)
+		return fetch(`${urlendpoint}task/${lang}/${currTask}/${articleTitle}`)
 			.then(
 				response => response.json(),
 				error => console.log('An error occurred.', error)
@@ -73,7 +73,7 @@ const handleArticleSave = (props) => {
 		const {result} = props;//ok/error
 		
 		const dataToSend = {
-			wiki: lang,
+			wiki: lang.replace('wiki',''),
 			job: currTask,
 			status,//check for 'noaction'
 			article: articleTitle,//articleID == null ? 0 : articleID,

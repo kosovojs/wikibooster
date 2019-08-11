@@ -37,7 +37,7 @@ const setArticleList = () => {
 		const currTask = state.tasks.taskId;
 		const lang = state.app.wiki;
 
-	  return fetch(`${urlendpoint}task/${lang}wiki/${currTask}/articles`)
+	  return fetch(`${urlendpoint}task/${lang}/${currTask}/articles`)
 		.then(
 		  response => response.json(),
 		  error => console.log('An error occurred.', error)
