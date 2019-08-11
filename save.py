@@ -20,7 +20,8 @@ class Save:
 			'1':'pievienots DEFAULTSORT',
 			'2':'divi vienādi vārdi pēc kārtas',
 			'3':'labots typo (sekojošais)',
-			'4':'labots typo (nākošais)'
+			'4':'labots typo (nākošais)',
+			'6':'pievienota {{reflist}} veidne'
 		}
 		if taskID in mapping:
 			finalSummary = mapping[taskID] + ' ([[toollabs:booster|booster]])'

@@ -1,6 +1,7 @@
 from .defaultsort import Defaultsort
 from .infobox import Infobox
 from .replacements import Replacements
+from .reflist import Reflist
 from db import DB
 
 class Tasks:
@@ -28,6 +29,10 @@ class Tasks:
 		elif task=='5':
 			infobox = Infobox()
 			return infobox.getData(self.wiki, article)
+		elif task=='6':
+			wikiLang = self.wiki.replace('wiki','')
+			relist = Reflist(wikiLang)
+			return relist.handleArticle(wikiLang, article)
 		else:
 			return {'status':'error','message':'No result'}
 		#

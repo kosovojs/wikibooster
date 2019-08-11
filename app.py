@@ -15,11 +15,11 @@ from tasks.main import Tasks
 from save import Save
 from db import DB
 
-#app = Flask(__name__, static_folder="./templates/static", template_folder="./templates")
-app = Flask(__name__)
+app = Flask(__name__, static_folder="./templates/static", template_folder="./templates")
+#app = Flask(__name__)
 CORS(app)
 
-user_agent = 'Edgars dev tools; tools.wmflabs.org/edgarsdev'
+user_agent = 'WikiBooster'
 
 __dir__ = os.path.dirname(__file__)
 
@@ -79,6 +79,12 @@ def runTests():
 	articleInfo = tasks.runTests()
 
 	return articleInfo
+
+@app.route('/wikis', methods=['GET'])
+def listWikis():
+	db = DB()
+	wikis = ['lvwiki']#db.getAvailableWikis()
+	return jsonify(wikis)
 
 @app.route('/tasks/<wiki>', methods=['GET'])
 def listJobs(wiki):

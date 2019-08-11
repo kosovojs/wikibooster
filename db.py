@@ -83,7 +83,7 @@ class DB:
 		return results
 
 	def getTasksForWiki(self,wiki):
-		sql = "SELECT url_id, nav_title, task, description FROM tasks where wiki=%s and active=1"
+		sql = "SELECT url_id, nav_title, task, description, (SELECT 1 FROM article_list WHERE task=tasks.id AND completion_date IS NULL LIMIT 1) AS hasArticles FROM tasks where wiki=%s and active=1"
 		results = self.run_query(sql, (wiki))
 		
 		return results
@@ -115,3 +115,9 @@ class DB:
 		self.conn.commit()
 		
 		return affected_rows
+
+	def getAvailableWikis():
+		sql = "SELECT distinct wiki FROM tasks where active=1"
+		results = self.run_query(sql, ())
+		
+		return [f['wiki'] for f in results]
