@@ -34,7 +34,6 @@ class DB:
 		self.defaultFile = configuration['DEFAULT_FILE'] if 'DEFAULT_FILE' in configuration else os.path.expanduser("~/replica.my.cnf")
 		
 	def connectTools(self):
-
 		if self.isDev:
 			self.conn = pymysql.connect(db=self.database, user=self.user, passwd=self.password, host=self.host, port=self.port, charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
 		else:
@@ -47,12 +46,19 @@ class DB:
 		currTime = strftime("%Y-%m-%d %H:%M:%S", gmtime())#'2009-01-05 22:14:39'
 		return currTime
 
-	def run_query(self, sql, params):
+	def run_query(self, sql, params = ()):
+
 		try:
-			self.cursor.execute(sql, params)
-			rows = self.cursor.fetchall()
+			if len(params) == 0:
+				self.cursor.execute(sql)
+				rows = self.cursor.fetchall()
+			else:
+				self.cursor.execute(sql, params)
+				rows = self.cursor.fetchall()
 		except KeyboardInterrupt:
-			sys.exit()
+			#sys.exit()
+			rows = []
+
 		return rows
 	#
 	def get_articles_for_task(self, wiki, task):
@@ -61,6 +67,24 @@ class DB:
 		results = [f['article_name'] for f in results]
 		
 		return results
+	#
+	def getCurrentArticlesForImport(self, task):
+		sql = "SELECT article_name FROM article_list WHERE (completion_date IS NULL OR result<>'') AND task=%s"#todo: fixme - ja rezultats nav pieejams
+		results = self.run_query(sql, str(task))
+		results = [f['article_name'] for f in results]
+		
+		return results
+
+	def getTaskID(self, wiki, taskName, subtaskName = None):
+		if subtaskName:
+
+			sql = "SELECT id FROM tasks WHERE  wiki=%s and task_type=%s and task_subtype=%s"
+			results = self.run_query(sql, (wiki, taskName, subtaskName))
+		else:
+			sql = "SELECT id FROM tasks WHERE  wiki=%s and task_type=%s"
+			results = self.run_query(sql, (wiki, taskName))
+
+		return results[0]['id']
 	#
 	#šeit jāatgriež arī lapas ID
 	def getNextArticleForTask(self,task_id,mode,lastID):
@@ -116,8 +140,26 @@ class DB:
 		
 		return affected_rows
 
-	def getAvailableWikis():
-		sql = "SELECT distinct wiki FROM tasks where active=1"
+	def getAvailableWikis(self):
+		sql = "SELECT distinct wiki FROM tasks where active=1 ORDER BY wiki"
 		results = self.run_query(sql, ())
 		
 		return [f['wiki'] for f in results]
+
+	def getTaskEditSummary(self, task):
+		sql = "SELECT edit_summary FROM tasks WHERE id=%s"
+		results = self.run_query(sql, str(task))
+		
+		return results[0]['edit_summary']
+
+	def getTaskType(self, task):
+		sql = "SELECT task_type FROM tasks WHERE id=%s"
+		results = self.run_query(sql, str(task))
+		
+		return results[0]['task_type']
+
+	def getTaskSubtype(self, task):
+		sql = "SELECT task_subtype FROM tasks WHERE id=%s"
+		results = self.run_query(sql, str(task))
+		
+		return results[0]['task_subtype']

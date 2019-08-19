@@ -1,6 +1,6 @@
-IS_DEV: True
-PORT: 3307
-HOST: localhost
-USER: root
+IS_DEV: False
+PORT: 3306
+HOST: tools.db.svc.eqiad.wmflabs
+USER: 
 PASSWORD: 
-DATABASE: yabrr
+DATABASE: s54062__booster_p

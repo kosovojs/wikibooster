@@ -6,19 +6,23 @@ from pywikibot import xmlreader
 from pywikibot import textlib
 from bz2 import BZ2File
 
+from dbWiki import DBWiki
+
 import urllib.parse as urlparse
 
 
 class DefaultSortSetup:
 	#https://stackoverflow.com/questions/267399/how-do-you-match-only-valid-roman-numerals-with-a-regular-expression
 	romans = 'M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})'
-	badwords = ['no','Lielais','DJ','Jaunākā','pašā','Svētais','Ibn','princese','princis','sultāne','sultāns','karalis','karaliene','vecākais','jaunākais']
-	badwords = [f.lower() for f in badwords]
+	badwords = {
+		'lv': [f.lower() for f in ['no','Lielais','DJ','Jaunākā','pašā','Svētais','Ibn','princese','princis','sultāne','sultāns','karalis','karaliene','vecākais','jaunākais']],
+		'et': ['']
+	}
 
-	sparql = '''select ?lv_title where {
+	sparql = '''select ?lv_title where {{
 		?item wdt:P31 wd:Q5 .
-		?lv_title schema:about ?item; schema:isPartOf <https://lv.wikipedia.org/> .
-	}'''
+		?lv_title schema:about ?item; schema:isPartOf <https://{}.wikipedia.org/> .
+	}}'''
 	def __init__(self, wiki):
 		self.wiki = wiki
 		self.findings = []
@@ -63,29 +67,48 @@ class DefaultSortSetup:
 		
 		return data["rows"]
 
-	def saveResultsToDatabase(self):
+	def saveResultsToDatabase(self, wikiLang):
 		addToDatabaseValues = []
 
-		toAdd = [[f, self.wiki, '1']
+		taskId = {
+			'lv': '1',
+			'et': '8'
+		}
+		toAdd = [[f, self.wiki, taskId[wikiLang]]
 			for f in self.findings
 		]
 		
 		return toAdd
 
-	def scanWiki(self):
-		pagesWithDefaultsort = self.get_quarry('19335')
-		pagesWithDefaultsort = [f[0].replace('_',' ') for f in pagesWithDefaultsort]
+	def getArticles(self, wiki):
+		dbConn = DBWiki()
+		dbConn.connect('{}wiki'.format(wiki))
+		data = dbConn.run_query("""select p.page_title
+from page p
+left join page_props pp on p.page_id = pp.pp_page and pp.pp_propname="defaultsort"
+where p.page_namespace=0 and pp.pp_value is not null""")
+
+		return data
+
+	def scanWiki(self, wiki):
+		quarry = {
+			'lv':'19335',
+			'et': '38386'
+		}
+		pagesWithDefaultsort = self.getArticles(wiki)#self.get_quarry(quarry[wiki])
+		pagesWithDefaultsort = [f['page_title'].replace('_',' ') for f in pagesWithDefaultsort]
 		
-		peoplefromsparql = self.basic_sparql(self.sparql)
-		peoplefromsparql = [urlparse.unquote(f['lv_title']['value'].replace('https://lv.wikipedia.org/wiki/', '').replace('_', ' ')) for f in peoplefromsparql]
+		sparqlQuery = self.sparql.format(wiki)
+		#print(sparqlQuery)
+		peoplefromsparql = self.basic_sparql(sparqlQuery)
+		peoplefromsparql = [urlparse.unquote(f['lv_title']['value'].replace('https://{}.wikipedia.org/wiki/'.format(wiki), '').replace('_', ' ')) for f in peoplefromsparql]
 		
 		fordb = []
 		for person in peoplefromsparql:
 			if person in pagesWithDefaultsort: continue
 			if not self.validate_title(person): continue
 			self.findings.append(person)
-			
 		#
 		print('scan ended')
-		return self.saveResultsToDatabase()
+		return self.saveResultsToDatabase(wiki)
 #

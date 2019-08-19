@@ -35,8 +35,8 @@ def authenticated_session(domain = 'meta.wikimedia.org'):
 	else:
 		return None
 
-def getUserInfo():
-	session = authenticated_session('lv.wikipedia.org')
+def getUserInfo(domain = 'meta.wikimedia.org'):
+	session = authenticated_session(domain)
 
 	if not session:
 		return None, None, {'status':'error','message':'not logged in'}
@@ -83,7 +83,7 @@ def runTests():
 @app.route('/wikis', methods=['GET'])
 def listWikis():
 	db = DB()
-	wikis = ['lvwiki']#db.getAvailableWikis()
+	wikis = ['etwiki','lvwiki']#db.getAvailableWikis()
 	return jsonify(wikis)
 
 @app.route('/tasks/<wiki>', methods=['GET'])
@@ -101,14 +101,16 @@ def listArticles(wiki,task_id):
 
 @app.route('/save', methods=['POST'])
 def doSave():
-	userStatus, session, respFromGettingUserInfo = getUserInfo()
+	req = request.get_json()
+	wiki = req['wiki']
+	domain = "{}.wikipedia.org".format(wiki)
+	userStatus, session, respFromGettingUserInfo = getUserInfo(domain)
 
 	if not userStatus:
 		return jsonify(respFromGettingUserInfo)
 	#
 	userName = respFromGettingUserInfo['username'] if 'username' in respFromGettingUserInfo else respFromGettingUserInfo['message']
 	
-	req = request.get_json()
 	job = req['job']
 	article = req['article']
 	result = req['result']

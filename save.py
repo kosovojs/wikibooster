@@ -14,24 +14,27 @@ class Save:
 		else:
 			self.csrf_token = ''
 
-	def makeSummary(self,taskID):
+	def makeSummary(self,taskID, summaryDB):
 		finalSummary = ''
 		mapping = {
 			'1':'pievienots DEFAULTSORT',
 			'2':'divi vienādi vārdi pēc kārtas',
 			'3':'labots typo (sekojošais)',
 			'4':'labots typo (nākošais)',
-			'6':'pievienota {{reflist}} veidne'
+			'6':'pievienota {{reflist}} veidne',
+			'7':'two repeated words',
+			'8':'added DEFAULTSORT',
+			'10':'added {{reflist}} template'
 		}
-		if taskID in mapping:
-			finalSummary = mapping[taskID] + ' ([[toollabs:booster|booster]])'
+		if summaryDB:
+			finalSummary = summaryDB + ' ([[toollabs:booster|booster]])'
 		else:
-			finalSummary = 'veikts labojums ar [[toollabs:booster|booster]] rīku'
+			finalSummary = 'edit made with [[toollabs:booster|booster]] tool'
 
 		return finalSummary
 
-	def doSaveAction(self, article, wikitext, task):
-		summary = self.makeSummary(task)
+	def doSaveAction(self, article, wikitext, task, editSummary):
+		summary = self.makeSummary(task, editSummary)
 		params = {'action': 'edit',
 					'title':article,
 					'text': wikitext,
@@ -52,16 +55,18 @@ class Save:
 
 	def saveArticle(self, job, article, result, wikitext, savingStatus, user):
 		db = DB()
+
 		#vispirms laikam jācenšas saglabāt; ja tur ir error, tad nesaglabāt DB?
 		if result == 'error':
 			affectedRows = db.saveStatus(job,article,'error',user)
 		elif result == 'success':
+			editSummary = db.getTaskEditSummary(job)
 			affectedRows = db.saveStatus(job,article,'ok',user)
 			if savingStatus== 'noaction':
 				print('no need to save')
 			else:
 				print('need to save')
-				self.doSaveAction(article, wikitext, job)
+				self.doSaveAction(article, wikitext, job, editSummary)
 			#simply save to DB result
 		#	return {'status':'ok'}
 		#task_id,pageID, result, user

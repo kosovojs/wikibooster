@@ -21,6 +21,9 @@ placeBeforeSections = {
 	'lv': [
 		u'Ārējās saites',
 	],
+	'et': [
+		u'Välislingid',
+	],
 	'ca': [
 		u'Bibliografia',
 		u'Bibliografia complementària',
@@ -234,6 +237,9 @@ referencesSections = {
 		u'Lähteet',
 		u'Viitteet',
 	],
+	'et': [
+		u'Viited',
+	],
 	'fr': [             # [[fr:Aide:Note]]
 		u'Notes et références',
 		u'Références',
@@ -342,6 +348,7 @@ referencesTemplates = {
 			   u'پانویس', u'پانویس‌ها ', u'پانویس ۲', u'پانویس۲',
 			   u'فهرست منابع'],
 		'fi': [u'Viitteet', u'Reflist'],
+		'et': [u'Viited', u'Reflist'],
 		'fr': [u'Références', u'Notes', u'References', u'Reflist'],
 		'he': [u'הערות שוליים', u'הערה'],
 		'hsb': [u'Referency'],
@@ -371,6 +378,7 @@ referencesTemplates = {
 # Define this only if required by your wiki.
 referencesSubstitute = {
 	'wikipedia': {
+		'et': u'{{viited}}',
 		'lv': u'{{atsauces}}',
 		'ar': u'{{مراجع}}',
 		'be': u'{{зноскі}}',

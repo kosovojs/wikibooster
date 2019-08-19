@@ -6,33 +6,42 @@ from db import DB
 
 class Tasks:
 	def __init__(self, wiki):
-		db = DB()
+		self.db = DB()
 		self.wiki = wiki
-		self.availableTasks = db.getTaskIdsForWiki(wiki)
+		self.availableTasks = self.db.getTaskIdsForWiki(wiki)
 
 	def getDataForTask(self, task, article):
 		if task not in self.availableTasks:
 			return {'status':'error','message':'Unknown task'}
 		#
-		if task=='1':
+		taskTypeData = self.db.getTaskType(task)
+		if taskTypeData == 'defaultsort':
 			defaultsort = Defaultsort()
 			return defaultsort.getData(self.wiki, article)
-		elif task=='2':
+		elif taskTypeData == 'repeated':
 			replacements = Replacements()
 			return replacements.getData('doubleWords',self.wiki, article)
-		elif task=='3':
+		elif taskTypeData == 'typo':
+			taskSubtype = self.db.getTaskSubtype(task)
 			replacements = Replacements()
-			return replacements.getData('sekojoss',self.wiki, article)
-		elif task=='4':
-			replacements = Replacements()
-			return replacements.getData('nakosais',self.wiki, article)
-		elif task=='5':
-			infobox = Infobox()
-			return infobox.getData(self.wiki, article)
-		elif task=='6':
+			return replacements.getData(taskSubtype,self.wiki, article)
+		#elif task=='5':
+		#	infobox = Infobox()
+		#	return infobox.getData(self.wiki, article)
+		elif taskTypeData == 'reflist':
 			wikiLang = self.wiki.replace('wiki','')
 			relist = Reflist(wikiLang)
 			return relist.handleArticle(wikiLang, article)
+		#elif task=='7':
+		#	replacements = Replacements()
+		#	return replacements.getData('doubleWords',self.wiki, article)
+		#if task=='8':
+		#	defaultsort = Defaultsort()
+		#	return defaultsort.getData(self.wiki, article)
+		#elif task=='10':
+		#	wikiLang = self.wiki.replace('wiki','')
+		#	relist = Reflist(wikiLang)
+		#	return relist.handleArticle(wikiLang, article)
 		else:
 			return {'status':'error','message':'No result'}
 		#

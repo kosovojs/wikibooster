@@ -9,6 +9,7 @@ class Replacements:
 	availableReplacements = ['doubleWords','sekojoss','nakosais']
 
 	replacementDict = {
+		'lvwiki': {
 		'doubleWords': [
 			{'from':r'(\s)(([A-Za-zĀČĒĢĪĶĻŅŠŪŽāčēģīķļņšūž]{3,})(\s+\3))(\s)','to':r'\4\5'}
 		],
@@ -19,7 +20,16 @@ class Replacements:
 		'nakosais': [
 			{'from':r'([Nn])ākoš','to':r'\1ākam'}
 		]
+		},
+		'etwiki': {
+		'doubleWords': [
+			{'from':r'(\s)(([A-Za-zŠšŽžÜüÖöÄäÕõ]{3,})(\s+\3))(\s)','to':r'\4\5'}
+		]
+		}
 	}
+
+
+	
 
 	def makeReplacements(self, inputText, replacements):
 		#https://stackoverflow.com/a/7088257 - lambda
@@ -38,7 +48,7 @@ class Replacements:
 		if not pageText:
 			return {'status':'error', 'message':'Could not get page text'}
 		#
-		repls = self.replacementDict[replacementType]
+		repls = self.replacementDict[wiki][replacementType]
 
 		newWikitext = self.makeReplacements(pageText, repls)
 		

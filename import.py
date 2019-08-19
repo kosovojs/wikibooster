@@ -7,33 +7,61 @@ from importer.reflist import ReflistSetup
 
 class Import:
 	
-	def __init__(self, wiki):
+	def __init__(self, wiki, date):
 		self.db = DB()
 		self.wiki = wiki
+		self.date = date
 		#self.availableTasks = db.getTaskIdsForWiki(wiki)
+	def getDumpScanLink(self):
+		return '/public/dumps/public/{wiki}/{date}/{wiki}-{date}-pages-articles.xml.bz2'.format(wiki = self.wiki, date = self.date)
+
+	def handleArticleRemoval(self, newArticles, task, subtask = None, shouldConvertFormat = False):
+		taskID = self.db.getTaskID(self.wiki, task, subtask)
+		currArticles = self.db.getCurrentArticlesForImport(taskID)
+		if shouldConvertFormat:
+			newArticles = [[f, self.wiki, taskID] for f in newArticles]
+		candidateArticles = [f for f in newArticles if f[0] not in currArticles]
+
+		return candidateArticles
 
 	def handleDefaultsortImport(self):
 		dumpscanner = DefaultSortSetup(self.wiki)
-		dumpresults = dumpscanner.scanWiki()
-		#print(dumpresults)
-		self.db.saveArticlesInDatabase(dumpresults)
+		langCode = self.wiki.replace('wiki','')
+		dumpresults = dumpscanner.scanWiki(langCode)
 
+		#for taskType in dumpresults:
+		self.db.saveArticlesInDatabase(self.handleArticleRemoval(dumpresults, 'defaultsort'))
+		#print(dumpresults)
+		
 	def handleReflistImport(self):
 		dumpscanner = ReflistSetup(self.wiki)
 		dumpresults = dumpscanner.scanWiki()
 		#print(dumpresults)
-		self.db.saveArticlesInDatabase(dumpresults)
+		self.db.saveArticlesInDatabase(self.handleArticleRemoval(dumpresults, 'reflist'))
 
 	def handleDumpScan(self):
 		dumpscanner = WikipediaDumpScanner(self.wiki)
-		dumpresults = dumpscanner.scanWiki('lvwiki-20190520-pages-articles.xml.bz2')
+		dumpresults = dumpscanner.scanWiki(self.getDumpScanLink())
+
+		for taskType in dumpresults:
+			taskTypeGeneral = {
+				'doubleWords': {'main':'repeated','sub':None},
+				'sekojoss': {'main':'typo','sub':'sekojoss'},
+				'nakosais': {'main':'typo','sub':'nakosais'}
+			}
+			finalType = taskTypeGeneral[taskType]
+			dataForDB = self.handleArticleRemoval(dumpresults[taskType], finalType['main'], finalType['sub'], True)
+			#print(dataForDB)
+			self.db.saveArticlesInDatabase(dataForDB)
 		#print(dumpresults)
-		self.db.saveArticlesInDatabase(dumpresults)
+		#self.db.saveArticlesInDatabase(dumpresults)
 
 	def main(self):
-		#self.handleDumpScan()
 		#self.handleDefaultsortImport()
-		self.handleReflistImport()
+		#self.handleReflistImport()
+		self.handleDumpScan()
 #
-importObj = Import('lvwiki')
+#importObj = Import('lvwiki')
+#importObj.main()
+importObj = Import('lvwiki','20190801')
 importObj.main()

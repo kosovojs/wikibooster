@@ -9,10 +9,15 @@ class Defaultsort:
 
 	#https://stackoverflow.com/questions/267399/how-do-you-match-only-valid-roman-numerals-with-a-regular-expression
 	romans = 'M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})'
-	badwords = ['no','Lielais','DJ','Jaunākā','pašā','Svētais','Ibn','princese','princis','sultāne','sultāns','karalis','karaliene','vecākais','jaunākais']
-	badwords = [f.lower() for f in badwords]
+	badwords = {
+		'lvwiki': [f.lower() for f in ['no','Lielais','DJ','Jaunākā','pašā','Svētais','Ibn','princese','princis','sultāne','sultāns','karalis','karaliene','vecākais','jaunākais']],
+		'etwiki': ['']
+	}
 
-	catregex = re.compile('(\[\[(category|kategorija)[^\n]+)', re.I)
+	catregex = {
+		'lvwiki': re.compile('(\[\[(category|kategorija)[^\n]+)', re.I),
+		'etwiki': re.compile('(\[\[(category|kategooria)[^\n]+)', re.I)
+	}
 
 	def pagenamebase(self, title):
 		return re.sub('\s*(\([^\(]+)$','',title)
@@ -25,7 +30,7 @@ class Defaultsort:
 		if ' ' not in pagenamebase:
 			return False
 			
-		if any([f for f in words if f.lower() in self.badwords]):
+		if any([f for f in words if f.lower() in self.badwords[self.wiki]]):
 			return False
 			
 		if any([f for f in words if re.search('^{}$'.format(self.romans),f)]):
@@ -59,8 +64,8 @@ class Defaultsort:
 		DEFAULTSORT = "{}, {}".format(last, first)
 		return DEFAULTSORT
 	#
-	def addDefaultsort(self, title, proposedDef):
-		site_orig = pywikibot.Site('lv', "wikipedia")
+	def addDefaultsort(self, title, wiki, proposedDef):
+		site_orig = pywikibot.Site(wiki.replace('wiki',''), "wikipedia")
 		page = pywikibot.Page(site_orig,title)
 
 		if not page.exists():
@@ -73,7 +78,7 @@ class Defaultsort:
 
 		newwikitext = wikitext
 		
-		categories = re.search(self.catregex,wikitext)
+		categories = re.search(self.catregex[self.wiki],wikitext)
 		
 		if not categories:
 			newwikitext = newwikitext + "\n\n{{DEFAULTSORT:%s}}" % (proposedDef)
@@ -89,6 +94,7 @@ class Defaultsort:
 	#
 	def getData(self, wiki, title):
 		db = DB()
+		self.wiki = wiki
 		
 		articleID = db.getArticleForTask(1,title)
 		if not self.validate_title(title):
@@ -97,6 +103,6 @@ class Defaultsort:
 		proposedDefaultsort = self.getDefaultsort(title)
 		otherWikiDef = self.getDefaultsortFromXWiki(title,'en')
 
-		origWikicode, newWikicode = self.addDefaultsort(title,proposedDefaultsort)
+		origWikicode, newWikicode = self.addDefaultsort(title,self.wiki,proposedDefaultsort)
 
 		return {'status':'ok', 'title':title,'defaultsort':proposedDefaultsort,'other':otherWikiDef,'origText':origWikicode,'changedText':newWikicode,'articleID':articleID}
