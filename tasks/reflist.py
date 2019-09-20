@@ -23,6 +23,7 @@ placeBeforeSections = {
 	],
 	'et': [
 		u'Välislingid',
+		u'Kirjandus',
 	],
 	'ca': [
 		u'Bibliografia',

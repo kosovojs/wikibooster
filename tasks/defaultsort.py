@@ -19,6 +19,11 @@ class Defaultsort:
 		'etwiki': re.compile('(\[\[(category|kategooria)[^\n]+)', re.I)
 	}
 
+	defaultsortText = {
+		'lvwiki': 'DEFAULTSORT',
+		'etwiki': 'JÄRJESTA'
+	}
+
 	def pagenamebase(self, title):
 		return re.sub('\s*(\([^\(]+)$','',title)
 
@@ -68,6 +73,8 @@ class Defaultsort:
 		site_orig = pywikibot.Site(wiki.replace('wiki',''), "wikipedia")
 		page = pywikibot.Page(site_orig,title)
 
+		defaultsortTextInWiki = self.defaultsortText[self.wiki]
+
 		if not page.exists():
 			return None, None
 
@@ -81,12 +88,12 @@ class Defaultsort:
 		categories = re.search(self.catregex[self.wiki],wikitext)
 		
 		if not categories:
-			newwikitext = newwikitext + "\n\n{{DEFAULTSORT:%s}}" % (proposedDef)
+			newwikitext = newwikitext + "\n\n{{%s:%s}}" % (defaultsortTextInWiki, proposedDef)
 			#print('didn\'t find cats, skipping')
 			#return
 		else:
 			categregexres = categories.group(1)
-			catanddef = "\n{{DEFAULTSORT:%s}}\n%s" % (proposedDef, categregexres)
+			catanddef = "\n{{%s:%s}}\n%s" % (defaultsortTextInWiki, proposedDef, categregexres)
 			newwikitext = newwikitext.replace(categregexres,catanddef)
 
 
