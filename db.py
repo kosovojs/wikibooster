@@ -70,7 +70,7 @@ class DB:
 	#
 	def getCurrentArticlesForImport(self, task):
 		sql = "SELECT article_name FROM article_list WHERE (completion_date IS NULL OR result='error') AND task=%s"#todo: fixme - ja rezultats nav pieejams
-		# OR result<>'ok'
+		# OR result<>''
 		results = self.run_query(sql, str(task))
 		results = [f['article_name'] for f in results]
 		

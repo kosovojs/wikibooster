@@ -5,9 +5,9 @@ class DBWiki:
 	conn = None
 	cursor = None
 
-	def __init__(self):
+	# def __init__(self):
 		
-		self.connect()
+		#self.connect()
 		
 	def connect(self, dbname, cluster='web', **kwargs):
 

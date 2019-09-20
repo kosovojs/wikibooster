@@ -80,6 +80,11 @@ class DefaultSortSetup:
 		
 		return toAdd
 
+	def encode_if_necessary(self, b):
+		if type(b) is bytes:
+			return b.decode('utf8')
+		return b
+
 	def getArticles(self, wiki):
 		dbConn = DBWiki()
 		dbConn.connect('{}wiki'.format(wiki))
@@ -87,6 +92,10 @@ class DefaultSortSetup:
 from page p
 left join page_props pp on p.page_id = pp.pp_page and pp.pp_propname="defaultsort"
 where p.page_namespace=0 and pp.pp_value is not null""")
+
+		
+		#with open('tsting.txt', 'w', encoding='utf8') as f:
+		#	f.write(str(data))
 
 		return data
 
@@ -96,7 +105,7 @@ where p.page_namespace=0 and pp.pp_value is not null""")
 			'et': '38386'
 		}
 		pagesWithDefaultsort = self.getArticles(wiki)#self.get_quarry(quarry[wiki])
-		pagesWithDefaultsort = [f['page_title'].replace('_',' ') for f in pagesWithDefaultsort]
+		pagesWithDefaultsort = [self.encode_if_necessary(f[0]).replace('_',' ') for f in pagesWithDefaultsort]
 		
 		sparqlQuery = self.sparql.format(wiki)
 		#print(sparqlQuery)

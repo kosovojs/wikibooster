@@ -63,9 +63,8 @@ class WikipediaDumpScanner:
 
 			fullPattern = r'{{{{\s*(({})\s*:\s*)?({})'.format(tpls_ns,tpls)
 
-			if not re.search(fullPattern, pagetext) and not re.search('<references', pagetext):
+			if not re.search(fullPattern, pagetext, re.IGNORECASE) and not re.search('<references', pagetext, re.IGNORECASE):
 				return True
-
 
 	def parse_findings(self,pagetext,regex,flag):
 		if flag:
@@ -79,7 +78,7 @@ class WikipediaDumpScanner:
 	def scanWiki(self, fileToParse, plugins):
 		counter = 0
 		whatToSearch = self.search[self.wiki]
-		
+
 		reflistTaskName = 'reflist'
 
 		with BZ2File(fileToParse) as xml_file:
@@ -102,7 +101,6 @@ class WikipediaDumpScanner:
 									self.findings[task].append(pagetitle)
 								else:
 									self.findings[task] = [pagetitle]
-					#
 					if 'reflist' in plugins:
 						doesHaveMatch = self.parse_reflist_search(pagetext)
 						
@@ -111,7 +109,6 @@ class WikipediaDumpScanner:
 								self.findings[reflistTaskName].append(pagetitle)
 							else:
 								self.findings[reflistTaskName] = [pagetitle]
-
 		#
 		print('scan ended')
 		return self.saveResultsToDatabase()

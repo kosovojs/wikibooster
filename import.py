@@ -48,24 +48,35 @@ class Import:
 			'sekojoss': {'main':'typo','sub':'sekojoss'},
 			'nakosais': {'main':'typo','sub':'nakosais'}
 		}
-
+		
 		for taskType in dumpresults:
 			if taskType == 'reflist':
-				self.db.saveArticlesInDatabase(self.handleArticleRemoval(dumpresults[taskType], 'reflist'))
+				
+				filtered = self.handleArticleRemoval(dumpresults[taskType], 'reflist', None, True)
+				self.db.saveArticlesInDatabase(filtered)
 			else:
 				finalType = taskTypeGeneral[taskType]
 				dataForDB = self.handleArticleRemoval(dumpresults[taskType], finalType['main'], finalType['sub'], True)
 				self.db.saveArticlesInDatabase(dataForDB)
-			
+				
 		#print(dumpresults)
 		#self.db.saveArticlesInDatabase(dumpresults)
 
-	def main(self):
+	def main_lv(self):
+		self.handleDefaultsortImport()
+		self.handleReflistImport()
+		self.handleDumpScan(['fnr'])
+
+	def main_et(self):
 		#self.handleDefaultsortImport()
 		#self.handleReflistImport()
 		self.handleDumpScan(['fnr','reflist'])
 #
 #importObj = Import('lvwiki')
 #importObj.main()
-importObj = Import('etwiki','20190801')
-importObj.main()
+
+#importObj = Import('lvwiki','20190901')
+#importObj.main_lv()
+
+importObj = Import('etwiki','20190901')
+importObj.main_et()
