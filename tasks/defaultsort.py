@@ -13,10 +13,10 @@ class Defaultsort:
 		'lvwiki': [f.lower() for f in ['no','Lielais','DJ','Jaunākā','pašā','Svētais','Ibn','princese','princis','sultāne','sultāns','karalis','karaliene','vecākais','jaunākais']],
 		'etwiki': ['']
 	}
-
-	catregex = {
-		'lvwiki': re.compile('(\[\[(category|kategorija)[^\n]+)', re.I),
-		'etwiki': re.compile('(\[\[(category|kategooria)[^\n]+)', re.I)
+	
+	categoriesForWiki = {
+		'lvwiki': 'category|kategorija',
+		'etwiki': 'category|kategooria'
 	}
 
 	defaultsortText = {
@@ -24,6 +24,13 @@ class Defaultsort:
 		'etwiki': 'JÄRJESTA'
 	}
 
+	def setData(self, wiki):
+		self.wiki = wiki
+
+		categoriesForWiki = self.categoriesForWiki[self.wiki]
+
+		self.catregex = re.compile('(\[\[('+categoriesForWiki+')\s*:[^\n]+)', re.I)
+		
 	def pagenamebase(self, title):
 		return re.sub('\s*(\([^\(]+)$','',title)
 
@@ -69,11 +76,33 @@ class Defaultsort:
 		DEFAULTSORT = "{}, {}".format(last, first)
 		return DEFAULTSORT
 	#
+	def removeDefaultsortTextFromCatsort(self, wikitext, proposedDef):
+		regexForSearch = r'(\[\[('+self.categoriesForWiki[self.wiki]+')\s*:([^\|]+))\|('+proposedDef+')\]\]'
+		
+		return re.sub(regexForSearch,r'\1]]',wikitext, flags=re.IGNORECASE)
+
+	def makeChanges(self, wikitext, newwikitext, proposedDef):
+		categories = re.search(self.catregex,wikitext)
+		
+		defaultsortTextInWiki = self.defaultsortText[self.wiki]
+
+		if not categories:
+			newwikitext = newwikitext + "\n\n{{%s:%s}}" % (defaultsortTextInWiki, proposedDef)
+			#print('didn\'t find cats, skipping')
+			#return
+		else:
+			categregexres = categories.group(1)
+			catanddef = "\n{{%s:%s}}\n%s" % (defaultsortTextInWiki, proposedDef, categregexres)
+			newwikitext = newwikitext.replace(categregexres,catanddef)
+			newwikitext = self.removeDefaultsortTextFromCatsort(newwikitext, proposedDef)
+
+
+		return wikitext, newwikitext
+
+
 	def addDefaultsort(self, title, wiki, proposedDef):
 		site_orig = pywikibot.Site(wiki.replace('wiki',''), "wikipedia")
 		page = pywikibot.Page(site_orig,title)
-
-		defaultsortTextInWiki = self.defaultsortText[self.wiki]
 
 		if not page.exists():
 			return None, None
@@ -84,32 +113,22 @@ class Defaultsort:
 			return None, None
 
 		newwikitext = wikitext
-		
-		categories = re.search(self.catregex[self.wiki],wikitext)
-		
-		if not categories:
-			newwikitext = newwikitext + "\n\n{{%s:%s}}" % (defaultsortTextInWiki, proposedDef)
-			#print('didn\'t find cats, skipping')
-			#return
-		else:
-			categregexres = categories.group(1)
-			catanddef = "\n{{%s:%s}}\n%s" % (defaultsortTextInWiki, proposedDef, categregexres)
-			newwikitext = newwikitext.replace(categregexres,catanddef)
 
+		wikitext, newwikitext = self.makeChanges(wikitext, newwikitext, proposedDef)
 
 		return wikitext, newwikitext
+		
 	#
 	def getData(self, wiki, title):
 		db = DB()
-		self.wiki = wiki
+		self.setData(wiki)
 		
-		articleID = db.getArticleForTask(1,title)
 		if not self.validate_title(title):
-			return {'status':'noaction', 'message':'Lapas nosaukums atzīts par nederīgu vai neatbilstošu šādai darbībai','articleID':articleID}
+			return {'status':'noaction', 'message':'Lapas nosaukums atzīts par nederīgu vai neatbilstošu šādai darbībai'}
 		
 		proposedDefaultsort = self.getDefaultsort(title)
-		otherWikiDef = self.getDefaultsortFromXWiki(title,'en')
+		#otherWikiDef = self.getDefaultsortFromXWiki(title,'en')
 
 		origWikicode, newWikicode = self.addDefaultsort(title,self.wiki,proposedDefaultsort)
 
-		return {'status':'ok', 'title':title,'defaultsort':proposedDefaultsort,'other':otherWikiDef,'origText':origWikicode,'changedText':newWikicode,'articleID':articleID}
+		return {'status':'ok', 'title':title,'defaultsort':proposedDefaultsort,'origText':origWikicode,'changedText':newWikicode}
