@@ -39,29 +39,33 @@ class Import:
 		#print(dumpresults)
 		self.db.saveArticlesInDatabase(self.handleArticleRemoval(dumpresults, 'reflist'))
 
-	def handleDumpScan(self):
+	def handleDumpScan(self, plugins = ['fnr']):
 		dumpscanner = WikipediaDumpScanner(self.wiki)
-		dumpresults = dumpscanner.scanWiki(self.getDumpScanLink())
+		dumpresults = dumpscanner.scanWiki(self.getDumpScanLink(), plugins)
+
+		taskTypeGeneral = {
+			'doubleWords': {'main':'repeated','sub':None},
+			'sekojoss': {'main':'typo','sub':'sekojoss'},
+			'nakosais': {'main':'typo','sub':'nakosais'}
+		}
 
 		for taskType in dumpresults:
-			taskTypeGeneral = {
-				'doubleWords': {'main':'repeated','sub':None},
-				'sekojoss': {'main':'typo','sub':'sekojoss'},
-				'nakosais': {'main':'typo','sub':'nakosais'}
-			}
-			finalType = taskTypeGeneral[taskType]
-			dataForDB = self.handleArticleRemoval(dumpresults[taskType], finalType['main'], finalType['sub'], True)
-			#print(dataForDB)
-			self.db.saveArticlesInDatabase(dataForDB)
+			if taskType == 'reflist':
+				self.db.saveArticlesInDatabase(self.handleArticleRemoval(dumpresults[taskType], 'reflist'))
+			else:
+				finalType = taskTypeGeneral[taskType]
+				dataForDB = self.handleArticleRemoval(dumpresults[taskType], finalType['main'], finalType['sub'], True)
+				self.db.saveArticlesInDatabase(dataForDB)
+			
 		#print(dumpresults)
 		#self.db.saveArticlesInDatabase(dumpresults)
 
 	def main(self):
 		#self.handleDefaultsortImport()
 		#self.handleReflistImport()
-		self.handleDumpScan()
+		self.handleDumpScan(['fnr','reflist'])
 #
 #importObj = Import('lvwiki')
 #importObj.main()
-importObj = Import('lvwiki','20190801')
+importObj = Import('etwiki','20190801')
 importObj.main()

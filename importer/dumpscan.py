@@ -10,10 +10,10 @@ class WikipediaDumpScanner:
 	search = {
 		'lvwiki': {
 			'doubleWords': [
-				{'regex':r'(\s)(([A-Za-zĀČĒĢĪĶĻŅŠŪŽāčēģīķļņšūž]{3,})(\s+\3))(\s)','flag':''}
+				{'regex':r'(\s)(([A-Za-zĀČĒĢĪĶĻŅŠŪŽāčēģīķļņšūž]{3,})(\s+\3))(\s)','flag':False}
 			],
 			'sekojoss': [
-				{'regex':r'[Ss]ekojoš','flag':re.IGNORECASE,'taskId':'3'}
+				{'regex':r'[Ss]ekojoš','flag':re.IGNORECASE}
 			],
 			'nakosais': [
 				{'regex':r'(?<!(ie|iz|pa))(?<!pie)(nākoš)(?!(ā|ā misija|ā turneja|ais_p|)\s*=)','flag':re.IGNORECASE}
@@ -21,8 +21,16 @@ class WikipediaDumpScanner:
 		},
 		'etwiki': {
 			'doubleWords': [
-				{'regex':r'(\s)(([A-Za-zŠšŽžÜüÖöÄäÕõ]{3,})(\s+\3))(\s)','flag':''}#
+				{'regex':r'(\s)(([A-Za-zŠšŽžÜüÖöÄäÕõ]{3,})(\s+\3))(\s)','flag':False}#
 			]
+		}
+	}
+
+	reflist = {
+		'etwiki': {
+			'templates': ['reflist','viited'],
+			'tplns': ['template','mall'],
+			'tags': ['<references']
 		}
 	}
 
@@ -32,6 +40,8 @@ class WikipediaDumpScanner:
 	
 	def saveResultsToDatabase(self):
 		addToDatabaseValues = {}
+		#with open('tsting.txt', 'w', encoding='utf8') as f:
+		#	f.write(str(self.findings))
 		#print(self.findings)
 		for task in self.findings:
 			taskData = self.findings[task]
@@ -42,18 +52,36 @@ class WikipediaDumpScanner:
 		#
 		return addToDatabaseValues
 
+	def parse_reflist_search(self, pagetext):
+
+
+		if re.search('<ref',pagetext):
+
+			searches = self.reflist[self.wiki]
+			tpls = '|'.join(searches['templates'])
+			tpls_ns = '|'.join(searches['tplns'])
+
+			fullPattern = r'{{{{\s*(({})\s*:\s*)?({})'.format(tpls_ns,tpls)
+
+			if not re.search(fullPattern, pagetext) and not re.search('<references', pagetext):
+				return True
+
+
 	def parse_findings(self,pagetext,regex,flag):
-		if flag == '':
-			positiveMatches = re.search(regex, pagetext)
-		else:
+		if flag:
 			positiveMatches = re.search(regex, pagetext, flag)
+		else:
+			positiveMatches = re.search(regex, pagetext)
 
 		if positiveMatches:
 			return True
 
-	def scanWiki(self, fileToParse):
+	def scanWiki(self, fileToParse, plugins):
 		counter = 0
 		whatToSearch = self.search[self.wiki]
+		
+		reflistTaskName = 'reflist'
+
 		with BZ2File(fileToParse) as xml_file:
 			for page in xmlreader.XmlDump(fileToParse).parse():
 				if page.ns == "0" and not page.isredirect:
@@ -61,7 +89,7 @@ class WikipediaDumpScanner:
 					pagetitle = page.title
 
 					counter+=1
-					#if counter == 500: break
+					#if counter == 5000: break
 
 					if counter % 10000 ==0:
 						print(counter)
@@ -74,6 +102,16 @@ class WikipediaDumpScanner:
 									self.findings[task].append(pagetitle)
 								else:
 									self.findings[task] = [pagetitle]
+					#
+					if 'reflist' in plugins:
+						doesHaveMatch = self.parse_reflist_search(pagetext)
+						
+						if doesHaveMatch:
+							if reflistTaskName in self.findings:
+								self.findings[reflistTaskName].append(pagetitle)
+							else:
+								self.findings[reflistTaskName] = [pagetitle]
+
 		#
 		print('scan ended')
 		return self.saveResultsToDatabase()
