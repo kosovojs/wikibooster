@@ -21,14 +21,14 @@ const mapDispatchToProps = (dispatch) => ({
 const setWikiLanguages = () => {
 	return function (dispatch, getState) {
 		
-		return dispatch(setWikiOptions(['lvwiki'])) /* fetch(`${urlendpoint}wikis`)
+		return fetch(`${urlendpoint}wikis`)
 			.then(
 				response => response.json(),
 				error => console.log('An error occurred.', error)
 			)
 			.then(json =>
 				dispatch(setWikiOptions(json))
-			) */
+			)
 	}
 }
 

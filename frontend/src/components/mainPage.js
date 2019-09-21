@@ -23,6 +23,7 @@ const MainPage = (props) => {
 		window.location = '#/' + wiki;
 		props.setWikiLang(wiki);
 	}
+	
 
 	useEffect(() => {
 		const wikiLang = props.match.params.lang;
