@@ -4,6 +4,7 @@ import { HashRouter as Router, Route, Switch  } from 'react-router-dom';
 //import ArticleList from './components/articleList';
 import TaskPage from '../containers/TaskPage';
 import MainPage from './mainPage';
+import TypoManagement from './TypoManagement';
 import Header from '../containers/Header';
 //import {Footer} from '../Footer';
 
@@ -26,6 +27,7 @@ function App(props) {
 		<Switch>
 		  <Route exact path="/:lang?" component={MainPage} />
 		  <Route exact path="/:lang/task/:id" component={TaskPage} />
+		  <Route exact path="/:lang/typo" component={TypoManagement} />
 		  <Route component={NotFound} />
 		</Switch>
 		<ToastContainer
