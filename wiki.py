@@ -47,4 +47,27 @@ class WikipediaAPI(object):
 			return res
 		
 		return None
+
+	@staticmethod
+	def getFileInfo(wiki, page):
+		wiki = wiki.replace('wiki','')#lvwiki -> lv
+
+		request = requests.get("https://{}.wikipedia.org/w/api.php".format(wiki), params={
+			"action": "query",
+			"format": "json",
+			"prop": "fileusage|imageinfo|revisions",
+			"titles": page,#formā File:....
+			"iiprop": "timestamp|user|comment|dimensions|size|url|metadata",
+			"iilimit": "max",
+			"rvprop": "timestamp|user|content",
+			"rvslots": "*",
+			"rvlimit": "1"
+		})
+		resp = request.json()
+		itemlist = resp['query']['pages'].keys()
+		for key in itemlist:
+			res = resp['query']['pages'][key]
+			return res
+		
+		return None
 #action='query', prop='langlinks',lllang='en', titles=article

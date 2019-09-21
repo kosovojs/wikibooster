@@ -2,6 +2,7 @@ from .defaultsort import Defaultsort
 from .infobox import Infobox
 from .replacements import Replacements
 from .reflist import Reflist
+from .commons import MoveToCommons
 from db import DB
 
 class Tasks:
@@ -32,6 +33,9 @@ class Tasks:
 			wikiLang = self.wiki.replace('wiki','')
 			relist = Reflist(wikiLang)
 			return relist.handleArticle(wikiLang, article)
+		elif taskTypeData == 'commons':
+			moveCommons = MoveToCommons()
+			return moveCommons.handleFile(self.wiki, article)
 		#elif task=='7':
 		#	replacements = Replacements()
 		#	return replacements.getData('doubleWords',self.wiki, article)
