@@ -43,16 +43,15 @@ export default class Task extends Component {
 	}
 
 	setTextareaText() {
-		const textToAdd = this.props.articleParams.changedText;
-		
-		this.setState({textAreaText: textToAdd});
+		if (typeof this.props.articleParams.changedText !== 'undefined') {
+			const textToAdd = this.props.articleParams.changedText;
+			
+			this.setState({textAreaText: textToAdd});
+		}
 	}
 
 	componentDidMount() {
-		this.props.setArticleData(this.setTextareaText)/* .then(
-			() => this.setTextareaText()
-		); */
-		
+		this.props.setArticleData(this.setTextareaText)
 	}
 
 	componentDidUpdate(prevProps) {
