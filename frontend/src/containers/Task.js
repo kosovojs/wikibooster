@@ -17,8 +17,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	setArticleData: () => {
-		dispatch(handleArticleSet());
+	setArticleData: (cb) => {
+		dispatch(handleArticleSet(cb));
 	},
 	goToNextArticle: () => {
 		dispatch(setArticle({}));
@@ -31,7 +31,7 @@ const mapDispatchToProps = (dispatch) => ({
 	}
 });
 
-const handleArticleSet = () => {
+const handleArticleSet = (cb) => {
 	return function (dispatch, getState) {
 		dispatch(setArticleLoading(true));
 
@@ -55,6 +55,8 @@ const handleArticleSet = () => {
 				dispatch(setArticleData({ origText, status: finalStatus, changedText }));
 
 				dispatch(setArticleLoading(false));
+
+				cb();
 			})
 	}
 }
@@ -67,20 +69,20 @@ const handleArticleSave = (props) => {
 
 		const currTask = state.tasks.taskId;
 		const lang = state.app.wiki;
-		
-		const { name:articleTitle, params: { changedText, status } } = state.tasks.currentArticle;
 
-		const {result} = props;//ok/error
-		
+		const { name: articleTitle, params: { changedText, status } } = state.tasks.currentArticle;
+
+		const { result, textForSave } = props;//ok/error
+
 		const dataToSend = {
-			wiki: lang.replace('wiki',''),
+			wiki: lang.replace('wiki', ''),
 			job: currTask,
 			status,//check for 'noaction'
 			article: articleTitle,//articleID == null ? 0 : articleID,
 			result,
-			wikitext: changedText == null ? '' : changedText
+			wikitext: changedText == null ? '' : textForSave
 		};
-		
+
 		return fetch(urlendpoint + 'save', { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(dataToSend) })
 			.then(
 				response => response.json(),
@@ -88,17 +90,17 @@ const handleArticleSave = (props) => {
 			)
 			.then(data => {
 				dispatch(setArticleSaving(false));
-				
+
 				if (data.status === 'ok' || data.status === 'info') {
-					toast.info('Dati saglabāti', { autoClose: 3000 });
+					toast.info('Saved!', { autoClose: 3000 });
 					dispatch(setArticle({}));
 				} else {
-					toast.warn('Notika kļūda', { autoClose: 4500 });
+					toast.warn('An error occurred.', { autoClose: 4500 });
 				}
 			})
 			.catch(data => {
 				dispatch(setArticleSaving(false));
-				toast.warn('Notika kļūda', { autoClose: 4500 });
+				toast.warn('An error occurred.', { autoClose: 4500 });
 			});
 	}
 }

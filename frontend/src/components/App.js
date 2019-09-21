@@ -1,20 +1,18 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import React, { useEffect } from 'react';
-import '../css/App.css';
 import { HashRouter as Router, Route, Switch  } from 'react-router-dom';
 //import ArticleList from './components/articleList';
 import TaskPage from '../containers/TaskPage';
 import MainPage from './mainPage';
 import Header from '../containers/Header';
 //import {Footer} from '../Footer';
-import {urlendpoint} from '../config';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const NotFound = ({ location }) => (
 	<div>
-	  <h3>Did not foun page <code>{location.pathname}</code></h3>
+	  <h3>Did not found page <code>{location.pathname}</code></h3>
 	</div>
 );
 
@@ -41,7 +39,7 @@ function App(props) {
 		draggable={false}
 		pauseOnHover
 		/>
-		{/*<Footer />*/}
+		{/* <Footer /> */}
 	</Router>
   );
 }

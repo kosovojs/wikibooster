@@ -5,7 +5,7 @@ const Header = (props) => {
 	//
 	const { isAuth, username, tasks, wikis, wiki } = props;
 
-	const wikiLang = wiki && wiki.replace('wiki','');
+	const wikiLang = wiki && wiki.replace('wiki', '');
 
 	const taskList = tasks
 		.filter(item => item.hasArticles !== null)
@@ -23,23 +23,23 @@ const Header = (props) => {
 				<NavDropdown title="Wikis" id="nav-wikis">
 					{wikiList}
 				</NavDropdown>
-				{wiki !== null && taskList.length>0 &&
-				<NavDropdown title="Tasks" id="nav-tasks">
-					{taskList}
-				</NavDropdown>}
+				{wiki !== null && taskList.length > 0 &&
+					<NavDropdown title="Tasks" id="nav-tasks">
+						{taskList}
+					</NavDropdown>}
 			</Nav>
 			<Nav className="ml-auto">
-        <OverlayTrigger
-          placement="bottom"
-          delay={{ show: 200 }}
-          overlay={<Tooltip id="t-github">Github</Tooltip>}
-        >
-				<Nav.Link href="https://github.com/kosovojs/wikibooster" target="_blank" rel="noopener noreferrer"><i className="fab fa-github spaced fa-lg"></i></Nav.Link>
+				<OverlayTrigger
+					placement="bottom"
+					delay={{ show: 200 }}
+					overlay={<Tooltip id="t-github">Github</Tooltip>}
+				>
+					<Nav.Link href="https://github.com/kosovojs/wikibooster" target="_blank" rel="noopener noreferrer"><i className="fab fa-github spaced fa-lg"></i></Nav.Link>
 				</OverlayTrigger>
 			</Nav>
 			<Nav>
 				{isAuth ? <>
-				<NavDropdown title={`Hi, ${username}!`} id="nav-tasks">
+					<NavDropdown title={`Hi, ${username}!`} id="nav-tasks">
 						{wiki && <NavDropdown.Item href={`//${wikiLang}.wikipedia.org/wiki/Special:Contributions/${username}`}>Contributions</NavDropdown.Item>}
 						<NavDropdown.Item href="/booster/logout"><i className="fas fa-sign-out-alt"></i> Logout</NavDropdown.Item>
 					</NavDropdown>

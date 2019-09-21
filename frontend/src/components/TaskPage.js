@@ -32,7 +32,7 @@ export default class TaskPage extends Component {
 					<Task />
 				</div>
 			</div>
-		</div> : "Nav neviena raksta!"}</div>}</div>}
+		</div> : "No articles!"}</div>}</div>}
 		</div>
 
 		);

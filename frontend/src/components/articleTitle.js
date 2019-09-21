@@ -1,12 +1,22 @@
 import React from 'react';
 
-const ArticleTitle = (title, wiki) => {
-	//const linkForURL = 
-	//const link = {title}//<a href='https://'+wiki+'.wikipedia.org/wiki/${title}' target='_blank'>{title}</a>;
+const urlSafeTitle = (title) => {
+	return encodeURI(title.replace(/ /gi, '_'))
+};
 
-	// <small>(<a href={'https://'+wiki+'.wikipedia.org/wiki/'+title} target='_blank' rel="noopener noreferrer">diskusija</a> | <a href={'https://'+wiki+'.wikipedia.org/wiki/'+title} target='_blank' rel="noopener noreferrer">vēsture</a>)</small>
-	wiki = wiki && wiki.replace('wiki','')
-	return <span><a href={'https://'+wiki+'.wikipedia.org/wiki/'+title} target='_blank' rel="noopener noreferrer">{title}</a></span>;
+const ArticleTitle = (title, wiki) => {
+	
+	wiki = wiki && wiki.replace('wiki', '')
+
+	const urlSafeWikititle = urlSafeTitle(title);
+	
+	return <span>
+		<a href={'https://' + wiki + '.wikipedia.org/wiki/' + urlSafeWikititle} target='_blank' rel="noopener noreferrer">{title}</a> <span style={{fontSize:'50%'}}>(
+			<a href={'https://' + wiki + '.wikipedia.org/w/index.php?title=' + urlSafeWikititle+'&action=edit'} target='_blank' rel="noopener noreferrer">edit</a>
+			{' '}|{' '}
+			<a href={'https://' + wiki + '.wikipedia.org/w/index.php?title=' + urlSafeWikititle+'&action=history'} target='_blank' rel="noopener noreferrer">history</a>
+		)</span>
+	</span>;
 };
 
 export default ArticleTitle;
