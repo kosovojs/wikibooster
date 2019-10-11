@@ -9,7 +9,7 @@ export default class TypoRow extends Component {
 			error: false,
 			data: {},
 			tests: [
-				{test: 'Kas kur kad', expected: 'kas kur', result: true, actual: 'kas kur', id: 1}
+				{test: '', expected: '', result: true, actual: ''}
 			]
 		};
 	}
@@ -35,15 +35,34 @@ export default class TypoRow extends Component {
 		});
 	}
 
+	handleTestChange = (key, section='data') => (event) => {
+		let value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+		
+		let tests = [...this.state.tests];
+		let item = {...tests[key]};
+		item[section] = value;
+		tests[key] = item;
+
+		this.setState({tests}, () => console.log(this.state, key, section));
+	}
+
 	componentDidUpdate(prevProps) {/* 
 		if (this.props.match.params.lang !== prevProps.match.params.lang) {
 			this.setupDate();
 		} */
 	}
 
+	addNewTest = () => {
+		this.setState(state => {
+		  const list = [...state.tests, {test: '', expected: '', result: true, actual: ''}];
+		  return {
+			tests: list
+		  };
+		});
+	}
+	
 	render() {
 		const { data, tests } = this.state;
-
 		
 		return <div className="container">
 			{JSON.stringify(data)}
@@ -98,19 +117,19 @@ export default class TypoRow extends Component {
 					</div>
 				</div>
 			</div>
-			<h4>Test-cases</h4>
-			{tests.map(test => <div className="form-row">
+			<h4>Test-cases <span style={{fontSize:'small'}}>(<span style={{cursor:'pointer'}} onClick={this.addNewTest} title="add new test-case">+</span>)</span></h4>
+			{tests.map((test, key) => <div className="form-row">
 				<div className="form-group col-md-4">
-					<label for="inputTest1Text">Test text</label>
-					<textarea className="form-control" id="inputTest1Text" value={test.test} onChange={this.handleChange('comment','test')}></textarea>
+					<label for={`inputTest${key}Text`}>Test text</label>
+					<textarea className="form-control" id={`inputTest${key}Text`} value={test.test} onChange={this.handleTestChange(key,'test')}></textarea>
 				</div>
 				<div className="form-group col-md-4">
-					<label for="inputTest1Expected">Expected text</label>
-					<textarea className="form-control" id="inputTest1Expected" value={test.expected} onChange={this.handleChange('from','test')}></textarea>
+					<label for={`inputTest${key}Expected`}>Expected text</label>
+					<textarea className="form-control" id={`inputTest${key}Expected`} value={test.expected} onChange={this.handleTestChange(key,'expected')}></textarea>
 				</div>
 				<div className="form-group col-md-4">
-					<label for="inputTest1Actual">Actual text</label>
-					<textarea className="form-control" id="inputTest1Actual" value={test.actual}></textarea>
+					<label for={`inputTest${key}Actual`}>Actual text</label>
+					<textarea className="form-control" id={`inputTest${key}Actual`} value={test.actual}></textarea>
 				</div>
 			</div>)}
 			
