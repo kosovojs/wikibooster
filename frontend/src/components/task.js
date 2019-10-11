@@ -93,7 +93,7 @@ export default class Task extends Component {
 					{<button disabled={savingProcess} type="button" className="btn btn-outline-info" onClick={this.toggleArticleEditing1}>Make changes</button>}
 				</div>
 				{status === 'noaction' ? <div className="noActionNeeded">No action needed for this article (press "Save")</div> : <div><h4>Edits</h4>
-					{origText === textAreaText ? <div className="noActionNeeded">Netika veiktas izmaiņas</div> : Comparision(origText, textAreaText)}</div>}
+					{origText === textAreaText ? <div className="noActionNeeded">No edit was made</div> : Comparision(origText, textAreaText)}</div>}
 				{articleEditing ? <div>
 					<h4>Edit text</h4>
 					You have the option to edit text before saving it to Wikipedia:

@@ -48,11 +48,14 @@ const handleArticleSet = (cb) => {
 			)
 			.then(json => {
 
-				const { status, origText, changedText } = json;
+				const { status, origText, changedText, message } = json;
 
 				const finalStatus = origText == null || changedText == null ? 'noaction' : status;
 
-				dispatch(setArticleData({ origText, status: finalStatus, changedText }));
+				let origTextFinal = origText ? origText : '';
+				let changedTextFinal = changedText ? changedText : '';
+
+				dispatch(setArticleData({ origText: origTextFinal, status: finalStatus, changedText: changedTextFinal }));
 
 				dispatch(setArticleLoading(false));
 
