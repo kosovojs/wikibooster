@@ -83,7 +83,7 @@ def runTests():
 @app.route('/wikis', methods=['GET'])
 def listWikis():
 	db = DB()
-	wikis = ['etwiki','lvwiki']#db.getAvailableWikis()
+	wikis = db.getAvailableWikis()
 	return jsonify(wikis)
 
 @app.route('/tasks/<wiki>', methods=['GET'])

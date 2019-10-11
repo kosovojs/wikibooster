@@ -17,11 +17,19 @@ class WikipediaDumpScanner:
 			],
 			'nakosais': [
 				{'regex':r'(?<!(ie|iz|pa))(?<!pie)(nākoš)(?!(ā|ā misija|ā turneja|ais_p|)\s*=)','flag':re.IGNORECASE}
+			],
+			'kimija': [
+				{'regex':r'\s(\((I|II|III|IV|V)\))','flag':False}
 			]
 		},
 		'etwiki': {
 			'doubleWords': [
 				{'regex':r'(\s)(([A-Za-zŠšŽžÜüÖöÄäÕõ]{3,})(\s+\3))(\s)','flag':False}#
+			]
+		},
+		'svwiki': {
+			'doubleWords': [
+				{'regex':r'(\s)(([A-Za-zÅÄÖåäö]{3,})(\s+\3))(\s)','flag':False}#
 			]
 		}
 	}

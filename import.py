@@ -46,7 +46,8 @@ class Import:
 		taskTypeGeneral = {
 			'doubleWords': {'main':'repeated','sub':None},
 			'sekojoss': {'main':'typo','sub':'sekojoss'},
-			'nakosais': {'main':'typo','sub':'nakosais'}
+			'nakosais': {'main':'typo','sub':'nakosais'},
+			'kimija': {'main':'typo','sub':'kimija'}
 		}
 		
 		for taskType in dumpresults:
@@ -71,12 +72,20 @@ class Import:
 		#self.handleDefaultsortImport()
 		#self.handleReflistImport()
 		self.handleDumpScan(['fnr','reflist'])
+
+	def main_sv(self):
+		self.handleDefaultsortImport()
+		#self.handleReflistImport()
+		#self.handleDumpScan(['fnr'])
 #
 #importObj = Import('lvwiki')
 #importObj.main()
 
-#importObj = Import('lvwiki','20190901')
-#importObj.main_lv()
+importObj = Import('lvwiki','20191001')
+importObj.main_lv()
 
-importObj = Import('etwiki','20190901')
-importObj.main_et()
+#importObj = Import('etwiki','20190901')
+#importObj.main_et()
+
+#importObj = Import('svwiki','20191001')
+#importObj.main_sv()

@@ -21,6 +21,9 @@ placeBeforeSections = {
 	'lv': [
 		u'Ārējās saites',
 	],
+	'sv': [
+		u'Externa länkar',
+	],
 	'et': [
 		u'Välislingid',
 		u'Kirjandus',
@@ -190,6 +193,10 @@ referencesSections = {
 	'ca': [
 		u'Referències',
 	],
+	'sv': [
+		u'Noter',
+		u'Referenser',
+	],
 	'lv': [
 		u'Atsauces',
 	],
@@ -330,7 +337,8 @@ referencesSections = {
 # on your wiki, you don't have to enter anything here.
 referencesTemplates = {
 	'wikipedia': {
-		'lv': ['Atsauces'],
+		'sv': ['Reflist'],
+		'lv': ['Atsauces[^+]','Reflist'],
 		'ar': [u'Reflist', u'مراجع', u'ثبت المراجع', u'ثبت_المراجع', u'بداية المراجع', u'نهاية المراجع'],
 		'be': [u'Зноскі', u'Примечания', u'Reflist', u'Спіс заўваг',
 			   u'Заўвагі'],

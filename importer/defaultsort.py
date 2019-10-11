@@ -16,7 +16,8 @@ class DefaultSortSetup:
 	romans = 'M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})'
 	badwords = {
 		'lv': [f.lower() for f in ['no','Lielais','DJ','Jaunākā','pašā','Svētais','Ibn','princese','princis','sultāne','sultāns','karalis','karaliene','vecākais','jaunākais']],
-		'et': ['']
+		'et': [''],
+		'sv': ['']
 	}
 
 	sparql = '''select ?lv_title where {{
@@ -72,7 +73,8 @@ class DefaultSortSetup:
 
 		taskId = {
 			'lv': '1',
-			'et': '8'
+			'et': '8',
+			'sv': '13'
 		}
 		toAdd = [[f, self.wiki, taskId[wikiLang]]
 			for f in self.findings
@@ -99,24 +101,46 @@ where p.page_namespace=0 and pp.pp_value is not null""")
 
 		return data
 
+	def scanSVwiki(self, wiki):
+		dbConn = DBWiki()
+		dbConn.connect('{}wiki'.format(wiki))
+		data = dbConn.run_query("""select page_title
+from categorylinks cl
+left join page_props pp on cl.cl_from = pp.pp_page and pp.pp_propname="defaultsort"
+join page p on p.page_id=cl.cl_from
+where cl.cl_to in ("Kvinnor", "Män") and cl_type='page' and pp_value is null and page_is_redirect=0 and page_namespace=0""")
+
+		
+		#with open('tsting.txt', 'w', encoding='utf8') as f:
+		#	f.write(str(data))
+		data = [self.encode_if_necessary(f[0]).replace('_',' ') for f in data]
+
+		return data
+
 	def scanWiki(self, wiki):
-		quarry = {
-			'lv':'19335',
-			'et': '38386'
-		}
-		pagesWithDefaultsort = self.getArticles(wiki)#self.get_quarry(quarry[wiki])
-		pagesWithDefaultsort = [self.encode_if_necessary(f[0]).replace('_',' ') for f in pagesWithDefaultsort]
-		
-		sparqlQuery = self.sparql.format(wiki)
-		#print(sparqlQuery)
-		peoplefromsparql = self.basic_sparql(sparqlQuery)
-		peoplefromsparql = [urlparse.unquote(f['lv_title']['value'].replace('https://{}.wikipedia.org/wiki/'.format(wiki), '').replace('_', ' ')) for f in peoplefromsparql]
-		
-		fordb = []
-		for person in peoplefromsparql:
-			if person in pagesWithDefaultsort: continue
-			if not self.validate_title(person): continue
-			self.findings.append(person)
+		if wiki == 'sv':
+			data = self.scanSVwiki(wiki)
+			for person in data:
+				if not self.validate_title(person): continue
+				self.findings.append(person)
+		else:
+			quarry = {
+				'lv':'19335',
+				'et': '38386'
+			}
+			pagesWithDefaultsort = self.getArticles(wiki)#self.get_quarry(quarry[wiki])
+			pagesWithDefaultsort = [self.encode_if_necessary(f[0]).replace('_',' ') for f in pagesWithDefaultsort]
+			
+			sparqlQuery = self.sparql.format(wiki)
+			#print(sparqlQuery)
+			peoplefromsparql = self.basic_sparql(sparqlQuery)
+			peoplefromsparql = [urlparse.unquote(f['lv_title']['value'].replace('https://{}.wikipedia.org/wiki/'.format(wiki), '').replace('_', ' ')) for f in peoplefromsparql]
+			
+			fordb = []
+			for person in peoplefromsparql:
+				if person in pagesWithDefaultsort: continue
+				if not self.validate_title(person): continue
+				self.findings.append(person)
 		#
 		print('scan ended')
 		return self.saveResultsToDatabase(wiki)
