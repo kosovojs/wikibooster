@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import { toast } from 'react-toastify';
+import { urlendpoint } from '../config';
 
-export default class TypoRow extends Component {
+import { withRouter } from "react-router";
+
+class TypoRow extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			loading: false,
 			error: false,
 			data: {},
-			tests: [
+			/* tests: [
 				{test: '', expected: '', result: true, actual: ''}
-			]
+			] */
 		};
 	}
 
@@ -24,7 +27,7 @@ export default class TypoRow extends Component {
 		this.setupDate();
 	}
 
-	handleChange = (key, section='data') => (event) => {
+	handleChange = (key, section = 'data') => (event) => {
 		let value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
 
 		this.setState({
@@ -35,15 +38,15 @@ export default class TypoRow extends Component {
 		});
 	}
 
-	handleTestChange = (key, section='data') => (event) => {
+	handleTestChange = (key, section = 'data') => (event) => {
 		let value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
-		
+
 		let tests = [...this.state.tests];
-		let item = {...tests[key]};
+		let item = { ...tests[key] };
 		item[section] = value;
 		tests[key] = item;
 
-		this.setState({tests}, () => console.log(this.state, key, section));
+		this.setState({ tests }, () => console.log(this.state, key, section));
 	}
 
 	componentDidUpdate(prevProps) {/* 
@@ -54,32 +57,55 @@ export default class TypoRow extends Component {
 
 	addNewTest = () => {
 		this.setState(state => {
-		  const list = [...state.tests, {test: '', expected: '', result: true, actual: ''}];
-		  return {
-			tests: list
-		  };
+			const list = [...state.tests, { test: '', expected: '', result: true, actual: '' }];
+			return {
+				tests: list
+			};
 		});
 	}
-	
-	render() {
-		const { data, tests } = this.state;
-		
-		return <div className="container">
-			{JSON.stringify(data)}
 
-			<h4>Main information</h4>
+	saveData = () => {
+		const { search_for, id } = this.state.data;
+		if (search_for.trim() === '') {
+			toast.warn("Add at least search phrase", { autoClose: 5000 });
+			return;
+		}
+
+		console.log(this.props.match.params)
+		const dataToSend = Object.assign({}, this.state.data, { wiki: this.props.match.params.lang });
+
+		fetch(`${urlendpoint}save_typo`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(dataToSend) })
+			.then(
+				response => response.json(),
+				error => console.log('An error occurred.', error)
+			)
+			.then(json => {
+				if (json.status === 'ok') {
+					toast.success("Typo saved!", { autoClose: 4000 });
+					const dataToSendToParent = Object.assign({}, this.state.data, { id: json.id, isNew: id == 0, rowID: this.props.row });
+
+					this.props.onDataUpdate(dataToSendToParent);
+				}
+			}
+			)
+	}
+
+	render() {
+		const { data } = this.state;
+
+		return <div style={{ width: '99%' }}>
 			<div className="form-row">
 				<div className="form-group col-md-4">
 					<label for="inputTitle">Title</label>
-					<input type="text" className="form-control" id="inputTitle" value={data.title} onChange={this.handleChange('title')} />
+					<input type="text" className="form-control" id="inputTitle" value={data.name} onChange={this.handleChange('name')} />
 				</div>
 				<div className="form-group col-md-4">
 					<label for="inputFrom">What to search for?</label>
-					<input type="text" className="form-control" id="inputFrom" value={data.from} onChange={this.handleChange('from')} />
+					<input type="text" className="form-control" id="inputFrom" value={data.search_for} onChange={this.handleChange('search_for')} />
 				</div>
 				<div className="form-group col-md-4">
 					<label for="inputTo">What to replace with?</label>
-					<input type="text" className="form-control" id="inputTo" value={data.to} onChange={this.handleChange('to')} />
+					<input type="text" className="form-control" id="inputTo" value={data.replace_with} onChange={this.handleChange('replace_with')} />
 				</div>
 			</div>
 			<div className="form-row">
@@ -104,11 +130,11 @@ export default class TypoRow extends Component {
 				</div>
 				<div className="form-group col-md-4">
 					<div className="form-check">
-						<input className="form-check-input" type="checkbox" id="wholeWorldCheck" checked={data.wholeWorld} onChange={this.handleChange('wholeWorld')} />
+						<input className="form-check-input" type="checkbox" id="wholeWorldCheck" checked={data.whole} onChange={this.handleChange('whole')} />
 						<label className="form-check-label" for="wholeWorldCheck">Match whole words</label>
 					</div>
 					<div className="form-check">
-						<input className="form-check-input" type="checkbox" id="dumpCheck" checked={data.dump} onChange={this.handleChange('dump')} />
+						<input className="form-check-input" type="checkbox" id="dumpCheck" checked={data.dumpsearch} onChange={this.handleChange('dumpsearch')} />
 						<label className="form-check-label" for="dumpCheck">Search dump</label>
 					</div>
 					<div className="form-check">
@@ -117,7 +143,7 @@ export default class TypoRow extends Component {
 					</div>
 				</div>
 			</div>
-			<h4>Test-cases <span style={{fontSize:'small'}}>(<span style={{cursor:'pointer'}} onClick={this.addNewTest} title="add new test-case">+</span>)</span></h4>
+			{/* <h4>Test-cases <span style={{fontSize:'small'}}>(<span style={{cursor:'pointer'}} onClick={this.addNewTest} title="add new test-case">+</span>)</span></h4>
 			{tests.map((test, key) => <div className="form-row">
 				<div className="form-group col-md-4">
 					<label for={`inputTest${key}Text`}>Test text</label>
@@ -131,9 +157,11 @@ export default class TypoRow extends Component {
 					<label for={`inputTest${key}Actual`}>Actual text</label>
 					<textarea className="form-control" id={`inputTest${key}Actual`} value={test.actual}></textarea>
 				</div>
-			</div>)}
-			
-			<button type="button" className="btn btn-primary">Save</button>
+			</div>)} */}
+
+			<button type="button" className="btn btn-primary" onClick={this.saveData}>Save</button>
 		</div>;
 	}
 }
+
+export default withRouter(TypoRow);

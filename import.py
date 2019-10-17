@@ -42,6 +42,8 @@ class Import:
 	def handleDumpScan(self, plugins = ['fnr']):
 		dumpscanner = WikipediaDumpScanner(self.wiki)
 		dumpresults = dumpscanner.scanWiki(self.getDumpScanLink(), plugins)
+		with open('tsting.txt', 'w', encoding='utf8') as f:
+			f.write(str(dumpresults))
 
 		taskTypeGeneral = {
 			'doubleWords': {'main':'repeated','sub':None},
@@ -74,18 +76,18 @@ class Import:
 		self.handleDumpScan(['fnr','reflist'])
 
 	def main_sv(self):
-		self.handleDefaultsortImport()
+		#self.handleDefaultsortImport()
 		#self.handleReflistImport()
-		#self.handleDumpScan(['fnr'])
+		self.handleDumpScan(['fnr'])
 #
 #importObj = Import('lvwiki')
 #importObj.main()
 
-importObj = Import('lvwiki','20191001')
-importObj.main_lv()
+""" importObj = Import('lvwiki','20191001')
+importObj.main_lv() """
 
 #importObj = Import('etwiki','20190901')
 #importObj.main_et()
 
-#importObj = Import('svwiki','20191001')
-#importObj.main_sv()
+importObj = Import('svwiki','20191001')
+importObj.main_sv()

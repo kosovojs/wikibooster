@@ -99,6 +99,12 @@ def listArticles(wiki,task_id):
 	return jsonify(articles)
 #
 
+@app.route('/typo/<wiki>', methods=['GET'])
+def listTypos(wiki):
+	db = DB()
+	typos = db.getTyposForWiki(wiki)
+	return jsonify(typos)
+
 @app.route('/save', methods=['POST'])
 def doSave():
 	req = request.get_json()
@@ -121,6 +127,36 @@ def doSave():
 	respFromSave = handlingSave.saveArticle(job,article,result,wikitext,status,userName)
 
 	return jsonify(respFromSave)
+
+@app.route('/save_typo', methods=['POST'])
+def doSaveTypo():
+	req = request.get_json()
+	wiki = req['wiki']
+	domain = "{}.wikipedia.org".format(wiki.replace('wiki',''))
+	userStatus, session, respFromGettingUserInfo = getUserInfo(domain)
+
+	if not userStatus:
+		return jsonify(respFromGettingUserInfo)
+	
+	userName = respFromGettingUserInfo['username'] if 'username' in respFromGettingUserInfo else respFromGettingUserInfo['message']
+	
+	active = req['active']
+	case = req['case']
+	comment = req['comment']
+	dumpsearch = req['dumpsearch']
+	minor = req['minor']
+	name = req['name']
+	regex = req['regex']
+	replace_with = req['replace_with']
+	search_for = req['search_for']
+	test_cases = req['test_cases']
+	whole = req['whole']
+	id = req['id']
+	
+	db = DB()
+	typoData = db.saveTypo(active,case,comment,dumpsearch,minor,name,regex,replace_with,search_for,test_cases,whole,wiki,userName,id)
+
+	return jsonify({'status':'ok', 'info':typoData})
 
 @app.route('/info', methods=['GET'])
 def user_info():

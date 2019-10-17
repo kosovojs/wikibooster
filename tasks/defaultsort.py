@@ -11,17 +11,20 @@ class Defaultsort:
 	romans = 'M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})'
 	badwords = {
 		'lvwiki': [f.lower() for f in ['no','Lielais','DJ','Jaunākā','pašā','Svētais','Ibn','princese','princis','sultāne','sultāns','karalis','karaliene','vecākais','jaunākais']],
-		'etwiki': ['']
+		'etwiki': [''],
+		'svwiki': ['']
 	}
 	
 	categoriesForWiki = {
 		'lvwiki': 'category|kategorija',
-		'etwiki': 'category|kategooria'
+		'etwiki': 'category|kategooria',
+		'svwiki': 'category|kategori'
 	}
 
 	defaultsortText = {
 		'lvwiki': 'DEFAULTSORT',
-		'etwiki': 'JÄRJESTA'
+		'etwiki': 'JÄRJESTA',
+		'svwiki': 'STANDARDSORTERING'
 	}
 
 	def setData(self, wiki):

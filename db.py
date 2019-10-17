@@ -113,6 +113,37 @@ class DB:
 		
 		return results
 
+	def getTyposForWiki(self,wiki,idFilter=False):
+		if idFilter:
+			sql = "SELECT id, name, search_for,replace_with, `comment`, is_regex as regex, case_sensitive AS `case`, match_whole_word as whole, active, dont_search_dump dumpsearch, is_minor as minor, test_cases FROM typo where wiki=%s and id=%s"
+			results = self.run_query(sql, (wiki,idFilter))[0]
+		else:
+			sql = "SELECT id, name, search_for,replace_with, `comment`, is_regex as regex, case_sensitive AS `case`, match_whole_word as whole, active, dont_search_dump dumpsearch, is_minor as minor, test_cases FROM typo where wiki=%s"
+			results = self.run_query(sql, (wiki))
+
+		
+		return results
+		
+	def saveTypo(self,active,case,comment,dumpsearch,minor,name,regex,replace_with,search_for,test_cases,whole,wiki,user, id):
+		#
+		if id==0:
+			currTime = self.getCurrentTime()
+
+			sqlTemplate = "insert into typo (name,search_for,replace_with,`comment`,is_regex,case_sensitive,match_whole_word,active,dont_search_dump,is_minor, wiki, addition_date, user_added) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+			self.cursor.execute(sqlTemplate, (name, search_for, replace_with, comment, regex, case, whole, active, dumpsearch, minor, wiki, currTime,user))
+			self.conn.commit()
+
+			id = self.run_query('SELECT LAST_INSERT_ID() as id')[0]['id']
+			
+		else:
+			sqlTemplate = "update typo set name=%s, search_for=%s,replace_with=%s, `comment`=%s, is_regex=%s, case_sensitive=%s, match_whole_word=%s, active=%s, dont_search_dump=%s, is_minor=%s where id=%s"
+
+			self.cursor.execute(sqlTemplate, (name, search_for, replace_with, comment, regex, case, whole, active, dumpsearch, minor, id))
+			self.conn.commit()
+
+		newTypoInfo = self.getTyposForWiki(wiki, id)
+		return newTypoInfo
+
 	def saveArticlesInDatabase(self,values):
 		currTime = self.getCurrentTime()
 		sqlTemplate = "insert into article_list (article_name, wiki, task, addition_date) values (%s, %s, %s, %s)"

@@ -3,6 +3,20 @@ import { toast } from 'react-toastify';
 import ReactTable from "react-table";
 import TypoRow from "./TypoRow";
 import "react-table/react-table.css";
+import { urlendpoint } from '../config';
+
+let setAll = (obj, val) => Object.keys(obj).forEach(k => obj[k] = val);
+
+const cleanValue = (typoObject) => {
+	let typoObject2 = Object.keys(typoObject).reduce(
+		(accumulator, current) => {
+		  accumulator[current] = null; 
+		  return accumulator
+		}, {});
+	console.log(typoObject2);
+	typoObject2.id = 0;
+	return typoObject2;
+}
 
 export default class TypoManagement extends Component {
 	constructor(props) {
@@ -10,45 +24,36 @@ export default class TypoManagement extends Component {
 		this.state = {
 			loading: false,
 			error: false,
-			data: []
+			data: [],
+			page:0,
+			expanded: {}
 		};
-		this.handleChange = this.handleChange.bind(this);
-		this.saveArticle = this.saveArticle.bind(this);
-		this.setAsIncorrect = this.setAsIncorrect.bind(this);
-		this.toggleArticleEditing = this.toggleArticleEditing.bind(this);
-		this.toggleArticleEditing1 = this.toggleArticleEditing1.bind(this);
-		this.setTextareaText = this.setTextareaText.bind(this);
 	}
 
 	setupDate = () => {
-		this.setState({
-			data: [
-				{ title: 'dfsdf', from: 'dfsdfsf', to: 'fsdfdfsdfsd' }
-			]
-		})
-	}
+		const wiki = this.props.match.params.lang;
 
-	saveArticle = (result) => (event) => {
-		const { isAuth } = this.props;
+		/* this.setState({
+			data: [{ "active": 1, "case": null, "comment": null, "dumpsearch": null, "minor": null, "name": "pa retam", "regex": 1, "replace_with": "\\1a retam", "search_for": "([Pp])aretam", "test_cases": null, "whole": null, id:1 }]
+		}) */
 
-		if (!isAuth) {
-			toast.warn("You have to log-in to save actions", { autoClose: 5000 });
-			return;
-		}
+		fetch(`${urlendpoint}typo/${wiki}`)
+			.then(
+				response => response.json(),
+				error => console.log('An error occurred.', error)
+			)
+			.then(json =>
+				
+				this.setState({
+					data: json
+				})
+			)
 
-		this.props.saveArticleData({ result, textForSave: this.state.textAreaText });
+
 	}
 
 	setAsIncorrect() {
 		this.props.goToNextArticle();
-	}
-
-	setTextareaText() {
-		if (typeof this.props.articleParams.changedText !== 'undefined') {
-			const textToAdd = this.props.articleParams.changedText;
-
-			this.setState({ textAreaText: textToAdd });
-		}
 	}
 
 	componentDidMount() {
@@ -61,16 +66,29 @@ export default class TypoManagement extends Component {
 		}
 	}
 
-	toggleArticleEditing(newValue = !this.state.articleEditing) {
-		this.setState({ articleEditing: newValue });
+	addNew = () => {
+		const {page, data, expanded } = this.state;
+		const numberOfRows = data.length;
+
+		const lastPage = Math.round(numberOfRows/10);
+		
+		this.setState({
+			data: [
+				...this.state.data,
+				cleanValue(this.state.data[0])
+			],
+			expanded: {
+				...this.state.expanded,
+				[numberOfRows]:{}
+			},
+			//page:lastPage
+		})
 	}
 
-	toggleArticleEditing1() {
-		this.setState({ articleEditing: !this.state.articleEditing });
-	}
-
-	handleChange(event) {
-		this.setState({ textAreaText: event.target.value });
+	handleDataUpdate = (typoData) => {
+		/* const {active, rowID, name, replace_with, search_for, id, isNew} = typoData;
+		const {data} = this.state;
+		 */
 	}
 
 	render() {
@@ -84,37 +102,35 @@ export default class TypoManagement extends Component {
 			return <div>Loading...</div>
 		}
 
-		return <div>{/*data && data.length > 0 && <>
-			{JSON.stringify(data)}
-
+		return <div>{data && data.length > 0 && <>
 			<ReactTable
 				data={data}
 				columns={[
 					{
 						Header: "Name",
-						accessor: "title"
+						accessor: "name"
 					},
 					{
 						Header: "What to search for?",
-						accessor: "from"
+						accessor: "search_for"
 					},
 					{
 						Header: "What to replace with",
-						accessor: "to"
+						accessor: "replace_with"
 					}
 				]}
 				defaultPageSize={10}
 				className="-striped -highlight"
 				SubComponent={(row) => {
-					console.log(row.row._original);
-					return <TypoRow data={row.row._original} />
+					return <TypoRow data={row.row._original} onDataUpdate={this.handleDataUpdate} row={row.index} />
 				}}
+				page={this.state.page}
+				expanded={this.state.expanded}
+				onPageChange={page => this.setState({ page })}
+				onExpandedChange={expanded => this.setState({ expanded })}
 			/>
-			</>*/
-			
-			<TypoRow data={{ title: 'dfsdf', from: 'dfsdfsf', to: 'fsdfdfsdfsd', comment:'fsdfsdfsdfsdfsdf', regex: false, case: false, wholeWorld:true, active: true, dump: false, minor: true }} />
-			
-			}
+		</>}
+		<button onClick={this.addNew} type="button" className="btn btn-primary">Add new typo!</button>
 		</div>;
 	}
 }
