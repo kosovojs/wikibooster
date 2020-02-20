@@ -16,7 +16,7 @@ oauthlib==3.0.1
 PyJWT==1.7.1
 PyMySQL==0.9.3
 pywikibot
-PyYAML==5.1
+PyYAML==5.2
 requests==2.21.0
 requests-oauthlib==1.2.0
 six==1.12.0
