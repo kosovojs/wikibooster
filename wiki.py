@@ -31,6 +31,29 @@ class WikipediaAPI(object):
 		})
 		'''
 	@staticmethod
+	def getArticleInfo(wiki, page):
+		request = requests.get("https://{}.wikipedia.org/w/api.php".format(wiki), params={
+			"action": "query",
+			"format": "json",
+			"prop": "categories|coordinates|redirects|templates",
+			"titles": page,
+			"redirects": 1,
+			"cllimit": "max",
+			"coprimary": "primary",
+			"rdprop": "title",
+			"rdlimit": "max",
+			"tllimit": "max"
+		})
+		
+		resp = request.json()
+		itemlist = resp['query']['pages'].keys()
+		for key in itemlist:
+			res = resp['query']['pages'][key]
+			return res
+		
+		return None
+
+	@staticmethod
 	def getOtherWikiArticle(wiki, page):
 		request = requests.get("https://{}.wikipedia.org/w/api.php".format(wiki), params={
 			"action": "query",

@@ -105,6 +105,12 @@ def listTypos(wiki):
 	typos = db.getTyposForWiki(wiki)
 	return jsonify(typos)
 
+@app.route('/rules/<wiki>', methods=['GET'])
+def listRules(wiki):
+	db = DB()
+	rules = db.getRulesForWiki(wiki)
+	return jsonify(rules)
+
 @app.route('/save', methods=['POST'])
 def doSave():
 	req = request.get_json()
@@ -157,6 +163,30 @@ def doSaveTypo():
 	typoData = db.saveTypo(active,case,comment,dumpsearch,minor,name,regex,replace_with,search_for,test_cases,whole,wiki,userName,id)
 
 	return jsonify({'status':'ok', 'info':typoData})
+
+@app.route('/save_rule', methods=['POST'])
+def saveRule():
+	req = request.get_json()
+	wiki = req['wiki']
+	domain = "{}.wikipedia.org".format(wiki.replace('wiki',''))
+	userStatus, session, respFromGettingUserInfo = getUserInfo(domain)
+
+	if not userStatus:
+		return jsonify(respFromGettingUserInfo)
+	
+	userName = respFromGettingUserInfo['username'] if 'username' in respFromGettingUserInfo else respFromGettingUserInfo['message']
+	
+	wiki = req['wiki']
+	rule_name = req['rule_name']
+	rule_object = req['rule_object']
+	rule = req['rule']
+	result = req['result']
+	id = req['id']
+	
+	db = DB()
+	db.saveRule(id, wiki, rule_name, rule_object, rule, result)
+
+	return jsonify({'status':'ok'})
 
 @app.route('/info', methods=['GET'])
 def user_info():

@@ -61,6 +61,12 @@ class DB:
 
 		return rows
 	#
+	def getWikiRules(self, wiki):
+		sql = "SELECT rule_object, rule, result from rules where wiki=%s"
+		results = self.run_query(sql, str(wiki))
+		
+		return results
+	#
 	def get_articles_for_task(self, wiki, task):
 		sql = "SELECT article_name FROM article_list WHERE task=%s AND completion_date IS NULL"
 		results = self.run_query(sql, str(task))
@@ -120,10 +126,30 @@ class DB:
 		else:
 			sql = "SELECT id, name, search_for,replace_with, `comment`, is_regex as regex, case_sensitive AS `case`, match_whole_word as whole, active, dont_search_dump dumpsearch, is_minor as minor, test_cases FROM typo where wiki=%s"
 			results = self.run_query(sql, (wiki))
-
+			
+		return results
+	
+	def getRulesForWiki(self, wiki):
+		sql = "SELECT id, wiki, rule_name, rule_object, rule, result FROM rules where wiki=%s"
+		results = self.run_query(sql, (wiki))
 		
 		return results
-		
+
+	def saveRule(self,id, wiki, rule_name, rule_object, rule, result):
+		#
+		if id==0:
+			#currTime = self.getCurrentTime()
+
+			sqlTemplate = "insert into rules (wiki, rule_name, rule_object, rule, result) values (%s, %s, %s, %s, %s)"
+			self.cursor.execute(sqlTemplate, (wiki, rule_name, rule_object, rule, result))
+			self.conn.commit()
+
+		else:
+			sqlTemplate = "update rules set wiki=%s, rule_name=%s,rule_object=%s, `rule`=%s, result=%s where id=%s"
+
+			self.cursor.execute(sqlTemplate, (wiki, rule_name, rule_object, rule, result, id))
+			self.conn.commit()
+
 	def saveTypo(self,active,case,comment,dumpsearch,minor,name,regex,replace_with,search_for,test_cases,whole,wiki,user, id):
 		#
 		if id==0:

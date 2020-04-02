@@ -3,6 +3,7 @@ from .infobox import Infobox
 from .replacements import Replacements
 from .reflist import Reflist
 from .commons import MoveToCommons
+from .move_to_wd import MoveToWikidata
 from db import DB
 
 class Tasks:
@@ -22,6 +23,9 @@ class Tasks:
 		elif taskTypeData == 'repeated':
 			replacements = Replacements()
 			return replacements.getData('doubleWords',self.wiki, article)
+		elif taskTypeData == 'move_to_wd':
+			inst = MoveToWikidata()
+			return inst.getData(self.wiki, article)
 		elif taskTypeData == 'typo':
 			taskSubtype = self.db.getTaskSubtype(task)
 			replacements = Replacements()
