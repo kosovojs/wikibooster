@@ -117,7 +117,7 @@ class WikipediaDumpScanner:
 								self.findings[reflistTaskName].append(pagetitle)
 							else:
 								self.findings[reflistTaskName] = [pagetitle]
-		#
+
 		print('scan ended')
 		return self.saveResultsToDatabase()
 #
