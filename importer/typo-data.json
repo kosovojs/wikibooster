@@ -1,0 +1,2142 @@
+[
+    {
+        "find": "\\Bn\u0123\\B",
+        "replace": "\u0146\u0123",
+        "comment": null,
+        "isregex": true,
+        "enabled": false,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\Ban\u0123[e\u0113]",
+        "replace": "a\u0146\u0123\u0113",
+        "comment": "evan\u0123elijs",
+        "isregex": true,
+        "enabled": true,
+        "minor": false,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "([Ee])n\u0123e(?!rm\u0101\u0146)",
+        "replace": "$1\u0146\u0123e",
+        "comment": "sen\u0123erm\u0101\u0146i",
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Aa])ps\\B",
+        "replace": "$1bs",
+        "comment": null,
+        "isregex": true,
+        "enabled": false,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Pp])a\\s(laikam|retam|visam)\\b",
+        "replace": "$1a$2",
+        "comment": "laiku pa laikam",
+        "isregex": true,
+        "enabled": false,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "([Kk])aut(kas|k\u0101d|kur|kad)",
+        "replace": "$1aut $2",
+        "comment": "kaut kas - k",
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "([Ss])azin(kas|k\u0101d|kur|kad)",
+        "replace": "$1azin $2",
+        "comment": "kaut kas - k",
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "([Dd])iez(kas|k\u0101d|kur|kad)",
+        "replace": "$1iez $2",
+        "comment": "kaut kas - k",
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "([Dd])iezin(kas|k\u0101d|kur|kad)",
+        "replace": "$1iezin $2",
+        "comment": "kaut kas - k",
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "([Nn])ez(kas|k\u0101d|kur|kad)",
+        "replace": "$1ez $2",
+        "comment": "kaut kas - k",
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "([Nn])ezin(kas|k\u0101d|kur|kad)",
+        "replace": "$1ezin $2",
+        "comment": "kaut kas - k",
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Kk])olon",
+        "replace": "$1olonn",
+        "comment": null,
+        "isregex": true,
+        "enabled": false,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Ii])ej",
+        "replace": "$1eej",
+        "comment": null,
+        "isregex": true,
+        "enabled": false,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Ee])urop",
+        "replace": "$1irop",
+        "comment": null,
+        "isregex": true,
+        "enabled": false,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Mm])e\u0161",
+        "replace": "$1e\u017e",
+        "comment": "me\u0161ana",
+        "isregex": true,
+        "enabled": false,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Pp])irms\\sKr(istus)?\\.?\\s",
+        "replace": "$1r. Kr.",
+        "comment": "Pirms kr\u012bzes",
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Vv])iss\\s(\\w{4,})",
+        "replace": "$1is$2",
+        "comment": "viss notiek",
+        "isregex": true,
+        "enabled": false,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\bU(\\d{2,})\\b",
+        "replace": "U-$1",
+        "comment": "U2 grupa",
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Tt])\u0101p\u0113c\\skad\\b",
+        "replace": "$1\u0101p\u0113c ka",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Tt])(\u0101|ur|ik)\\spat\\b",
+        "replace": "$1$2pat",
+        "comment": "v\u0113l vajag: t\u0101pat,? k\u0101",
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Ll])\u012bd?z\\s?ko\\b",
+        "replace": "$1\u012bdzko",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Dz])\u012bvesg\u0101jum",
+        "replace": "$1\u012bves g\u0101jum",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Ii])t(in)?(k\u0101|ne(k\u0101ds|kas|kur|maz|viens))\\b",
+        "replace": "$1t$2 $3",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Mm])ob\u012bl",
+        "replace": "$1obil",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Aa])utomob\u012bl",
+        "replace": "$1utomobil",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\b([Ss])sekojo\u0161i\\b",
+        "replace": "$1\u0101di",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Gg])\u016blb",
+        "replace": "$1ulb",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Tt])renner",
+        "replace": "$1rener",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Pp])\u0113ctam\\b",
+        "replace": "$1\u0113c tam",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Ii])nscin",
+        "replace": "$1nscen",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Gg])anjau\\b",
+        "replace": "$1an jau",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Ff])os\u012bl",
+        "replace": "$1osil",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "([\u0122\u0123])\u0113rbo",
+        "replace": "$1erbo",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Aa])lb\u016bm",
+        "replace": "$1lbum",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Tt])ekst\u012bl",
+        "replace": "$1ekstil",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Hh])ig\u0113n",
+        "replace": "$1igi\u0113n",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Mm]|[Dd])(agnet|ikt|ikr)afon",
+        "replace": "$1$2ofon",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Pp])atalo([\u0123g])",
+        "replace": "$1atolo$2",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Ss])tab\u012bl",
+        "replace": "$1tabil",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b\u0100frik\u0101\\B",
+        "replace": "Afrik\u0101",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\b\u0101frik\u0101\\B",
+        "replace": "afrik\u0101",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\b([Ll])icen[z\u017es](?!\\s*=)",
+        "replace": "$1icenc",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Dd])zelzbet",
+        "replace": "$1zelzsbet",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Tt])\u0113mek",
+        "replace": "$1\u0113m\u0113k",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Pp])atreiz\\b",
+        "replace": "$1a\u0161laik",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Tt])[a\u0101]p[e\u0113]c\\b",
+        "replace": "$1\u0101p\u0113c",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\bPie\\s[tk]am",
+        "replace": "Turkl\u0101t",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\b([Nn])ummur(?!mui\u017e)",
+        "replace": "$1umur",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Kk])antr\u012b\\s((\\w))",
+        "replace": "$1antri$2",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Kk])antr\u012b",
+        "replace": "$1antri",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Dd])ebate\\b",
+        "replace": "$1ebates",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Aa])c\u012bm\\sredz(ot|am)",
+        "replace": "$1c\u012bmredz$2",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Pp])ret\u012bm\\b",
+        "replace": "$1ret\u012b",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Tt])urpret\u012bm\\b",
+        "replace": "$1urpret\u012b",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Kk])onditorij",
+        "replace": "$1onditorej",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Ll])ok[ao]m[ao]t\u012b",
+        "replace": "$1okomot\u012b",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\bG\u0113rbo",
+        "replace": "\u0122erbo",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Ee])kanomi",
+        "replace": "$1konomi",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Dd])ak\u0101n",
+        "replace": "$1ek\u0101n",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Ll])uksafor",
+        "replace": "$1uksofor",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\bg\u0113rbo",
+        "replace": "\u0123erbo",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\bPar\\scik\\b",
+        "replace": "T\u0101 k\u0101",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\bpar\\scik\\b",
+        "replace": "t\u0101 k\u0101",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\b([Tt])olet",
+        "replace": "$1ualet",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Mm])[a\u0101]jas\\s?lap(?!a\\s*=)",
+        "replace": "$1\u0101jaslap",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Vv])iduskol",
+        "replace": "$1idusskol",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Ii])[sz]+tab",
+        "replace": "$1stab",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([\u0160\u0161])[k\u0137]i[\u0146n][\u0137k]",
+        "replace": "$1\u0137i\u0146\u0137",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\bS[k\u0137]i[\u0146n][\u0137k]",
+        "replace": "\u0160\u0137i\u0146\u0137",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\bs[k\u0137]i[\u0146n][\u0137k]",
+        "replace": "\u0161\u0137i\u0146\u0137",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Dd])zel[zs]*ce\u013c",
+        "replace": "$1zelzce\u013c",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Rr])engen",
+        "replace": "$1entgen",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Mm])od\u0113m",
+        "replace": "$1odem",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Dd])atu\\sb\u0101zes",
+        "replace": "$1atub\u0101zes",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Dd])atu\\s?b\u0101\u017eu",
+        "replace": "$1atub\u0101zu",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Dd])atub\u0101zu\\svad\u012bba(\\w*)",
+        "replace": "$1atub\u0101zu p\u0101rvald\u012bba$2",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\B\u0157\\B",
+        "replace": "r",
+        "comment": null,
+        "isregex": true,
+        "enabled": false,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\bAmerikas\\s[Ss]avienot([^\\s]+)\\s[Vv]alst([^\\s]+)",
+        "replace": "Amerikas Savienot$1 Valst$2",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\bApvienot([^\\s]+)\\skaralist([^\\s]+)",
+        "replace": "Apvienot$1 Karalist$2",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Ee])ntuazism",
+        "replace": "$1ntuziasm",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Ii])ntres",
+        "replace": "$1nteres",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Pp])atreiz\u0113j",
+        "replace": "$1a\u0161reiz\u0113j",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Vv])islaik",
+        "replace": "$1isu laiku",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([NnTt])([u|\u0101|e|ik|ur])pat\u0101s\\b",
+        "replace": "$1$pat",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([CcTt])ik\u0101rt\\b",
+        "replace": "$1ikk\u0101rt",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\bpie\\s[tk]am",
+        "replace": "turkl\u0101t",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\b([Oo])treiz\\b",
+        "replace": "$1otrreiz",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Tt])iko\\b",
+        "replace": "$1ikko",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Aa])(iz|r)\\svien\\b",
+        "replace": "$1$2vien",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Hh])ip[\\s-]?hop\\B",
+        "replace": "$1iphop",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\bKlavi[ae]t\u016br",
+        "replace": "Tastat\u016br",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\bklavi[ae]t\u016br",
+        "replace": "tastat\u016br",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\b([Pp])ropogand",
+        "replace": "$1ropagand",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Kk])ontroband",
+        "replace": "$1ontraband",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Oo])rand\u017e",
+        "replace": "$1ran\u017e",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Tt])[a\u0101]d[\u0113e]j[\u0101a]di\\b",
+        "replace": "$1\u0101d\u0113j\u0101di",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Bb])at[ae]r[ie]j",
+        "replace": "$1aterij",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Dd])u[bp]lik[a\u0101]t",
+        "replace": "$1ublik\u0101t",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Kk])ompoten",
+        "replace": "$1ompeten",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Hh])elihopter",
+        "replace": "$1elikopter",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Ee])su\\b",
+        "replace": "$1smu",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Aa])tvilkn",
+        "replace": "$1tvilktn",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Ii])n\u017e[ie]n(ie|\u0113)r",
+        "replace": "$1n\u017eenier",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Mm])italo\u0123i",
+        "replace": "$1itolo\u0123i",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Pp])aralimp",
+        "replace": "$1araolimp",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Jj])o\\sproj\u0101m\\b",
+        "replace": "$1oproj\u0101m",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Hh])i[ea]rhi",
+        "replace": "$1ierarhi",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Tt])[a\u0101]l[\u0101a]k\\b",
+        "replace": "$1\u0101l\u0101k",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Ll])aima\\sslim\u012bb",
+        "replace": "$1aimas slim\u012bb",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "f\u012bl",
+        "replace": "fil",
+        "comment": null,
+        "isregex": false,
+        "enabled": false,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\b([Ll])e[n\u0146][\u0137k]",
+        "replace": "$1e\u0146\u0137",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "([Ss])\u012bnus",
+        "replace": "$1inus",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Tt])\u0113lot\u0101ja\\sm\u0101ksl\u0101",
+        "replace": "$1\u0113lot\u0101j\u0101 m\u0101ksl\u0101",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Gg])ardrob",
+        "replace": "$1arderob",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Oo])r\u0123in\u0101l",
+        "replace": "$1ri\u0123in\u0101l",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Tt])ezaur(?<!https?://[\\w\\.\\,\\;\\:\\/\\?\\&\\%\\+\\=\\-\\#\\~\\!\\(\\)\\*_]+)",
+        "replace": "$1\u0113zaur",
+        "comment": "URL",
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Dd])zied[a\u0101]t[a\u0101]j",
+        "replace": "$1zied\u0101t\u0101j",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Ff])otogr\u0101f\u0113",
+        "replace": "$1otograf\u0113",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Vv])i[\u0146n][\u0161s]\\b",
+        "replace": "$1i\u0146\u0161",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Vv])i[\u0146n]a\\b",
+        "replace": "$1i\u0146a",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "([Aa])t\u0113l",
+        "replace": "$1tt\u0113l",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Pp])lastal\u012bn",
+        "replace": "$1lastil\u012bn",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Nn])oziedzinie",
+        "replace": "$1oziedznie",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([\u017d\u017e])elant\u012bn",
+        "replace": "$1elat\u012bn",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([\u017d\u017e])e[n\u0146][s\u0161]e[n\u0146]",
+        "replace": "$1e\u0146\u0161e\u0146",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([\u0160\u0161])ederv",
+        "replace": "$1edevr",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Oo])rnoment",
+        "replace": "$1rnament",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Kk])alei?d[ao]skop",
+        "replace": "$1aleidoskop",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Aa])tkredit\u0101cij",
+        "replace": "$1kredit\u0101cij",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\u00b0K",
+        "replace": "K",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Nn])etikai\\b",
+        "replace": "$1e tikai",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Ss])av+a\u013c+",
+        "replace": "$1avva\u013c",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Ss])av+an+",
+        "replace": "$1avann",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([\u017d\u017e])andr",
+        "replace": "$1anr",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Aa])steor\u012bd",
+        "replace": "$1stero\u012bd",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\bSavlaic\u012bgi\\b",
+        "replace": "Laikus",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\bsavlaic\u012bgi\\b",
+        "replace": "laikus",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\b([Nn])osta[\u013cl][\u0123g]i",
+        "replace": "$1ostal\u0123i",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Ee])kspid\u012bcij",
+        "replace": "$1ksped\u012bcij",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Dd])epartment\\B",
+        "replace": "$1epartament",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Uu])ni?versi?t\u0101t",
+        "replace": "$1niversit\u0101t",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\bp\\.?m\\?.e\\.*\\b",
+        "replace": "p.m.\u0113.",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\bp\\.?m\\?.e\\.?\\b",
+        "replace": "p.m.\u0113.",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Pp])asual",
+        "replace": "$1asaul",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Nn])e\\sk\u0101\\b",
+        "replace": "$1ek\u0101",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\bLos\\sAnd\u017eelos",
+        "replace": "Losand\u017eelos",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "([Aa])l[hk][ao]kol",
+        "replace": "$1lkohol",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Kk])atreiz\\b",
+        "replace": "$1atrreiz",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Aa])rhitip",
+        "replace": "$1rhetip",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Aa])neks([^i])",
+        "replace": "$1neks$2",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Dd])ienasta\\b",
+        "replace": "$1ienesta",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Aa])negdot",
+        "replace": "$1nekdot",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Cc])aumur",
+        "replace": "$1aurum",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Ss])p[e\u0113]l[e\u0113]t[a\u0101]j",
+        "replace": "$1p\u0113l\u0113t\u0101j",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Vv])en\u0113r",
+        "replace": "$1ener",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Aa])nan\u0101s",
+        "replace": "$1nanas",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Kk])reiv",
+        "replace": "$1riev",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Vv])ice-(\\w|\u010d)",
+        "replace": "$1ice$2",
+        "comment": "vicemiss?",
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Aa])nti-(\\w)",
+        "replace": "$1nti$2",
+        "comment": null,
+        "isregex": true,
+        "enabled": false,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "<[\\/\\\\]?(hr|br)( [^\\/\\\\>]+?)? ?[\\/\\\\]?>",
+        "replace": "<$1$2 />",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "\\b([Aa])neks",
+        "replace": "$1neks",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "k\u0101,\\ piem\u0113ram",
+        "replace": "piem\u0113ram",
+        "comment": null,
+        "isregex": false,
+        "enabled": false,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "k\u0101\\ piem\u0113ram",
+        "replace": "piem\u0113ram",
+        "comment": null,
+        "isregex": false,
+        "enabled": false,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\{\\{[Cc]ommons\\|[Cc]ategory\\:",
+        "replace": "{{commonscat|",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "merika\u0146u",
+        "replace": "merik\u0101\u0146u",
+        "comment": null,
+        "isregex": false,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "<div\\ class=\"references-small\"><references\\ /></div>",
+        "replace": "{{atsauces}}",
+        "comment": null,
+        "isregex": false,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "<div\\ class=\"references-small\">\\ <references\\ />\\ </div>",
+        "replace": "{{atsauces}}",
+        "comment": null,
+        "isregex": false,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "<references\\ />",
+        "replace": "{{atsauces}}",
+        "comment": null,
+        "isregex": false,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\{\\{[Vv]al-",
+        "replace": "{{val|",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "vjl\\.",
+        "replace": "v.j.l.",
+        "comment": null,
+        "isregex": false,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "vjl",
+        "replace": "v.j.l.",
+        "comment": "infokaste",
+        "isregex": false,
+        "enabled": false,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\buc\\.",
+        "replace": "u.c.",
+        "comment": "nestr\u0101d\u0101",
+        "isregex": true,
+        "enabled": false,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "Singleline"
+    },
+    {
+        "find": "\\buc\\b",
+        "replace": "u.c.",
+        "comment": null,
+        "isregex": true,
+        "enabled": false,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "u\\.t\\.t\\.\\.",
+        "replace": "utt.",
+        "comment": null,
+        "isregex": false,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "u\\.t\\.t\\.",
+        "replace": "utt.",
+        "comment": null,
+        "isregex": false,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "m2\\(\\?!\\\\s\\*=\\)",
+        "replace": "m<sup>2</sup>",
+        "comment": "infokastes",
+        "isregex": false,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\b\u0101r\u012b\\b",
+        "replace": "ar\u012b",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\b([Mm])\u0113dij",
+        "replace": "$1edij",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\b([Pp])atreiz",
+        "replace": "$1a\u0161laik",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\bAplik\u0101cija",
+        "replace": "Lietotne",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\baplik\u0101cija",
+        "replace": "lietotne",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\bAplik\u0101cij\u0101",
+        "replace": "Lietotn\u0113",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\baplik\u0101cij\u0101",
+        "replace": "lietotn\u0113",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "Aplik\u0101ciju",
+        "replace": "Lietot\u0146u",
+        "comment": null,
+        "isregex": false,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "aplik\u0101ciju",
+        "replace": "lietot\u0146u",
+        "comment": null,
+        "isregex": false,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "(\\d)\\.?\\-(tiem|tie|tajos|tos|to|tajiem)",
+        "replace": "$1.",
+        "comment": null,
+        "isregex": true,
+        "enabled": false,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "(\\d)\\.?\\-(iem|ie|ajos|os|o|ajiem)",
+        "replace": "$1.",
+        "comment": null,
+        "isregex": true,
+        "enabled": false,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\u0113brej",
+        "replace": "ebrej",
+        "comment": null,
+        "isregex": false,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\u0112brej",
+        "replace": "Ebrej",
+        "comment": null,
+        "isregex": false,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\b([Aa])irod",
+        "replace": "$1erod",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "IgnoreCase"
+    },
+    {
+        "find": "lakus\\ efekt",
+        "replace": "lakusefekt",
+        "comment": null,
+        "isregex": false,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\b([A-Za-z\u0100\u010c\u0112\u0122\u012a\u0136\u013b\u0145\u0160\u016a\u017d\u0101\u010d\u0113\u0123\u012b\u0137\u013c\u0146\u0161\u016b\u017e]+)\\s+\\1\\b",
+        "replace": "$1",
+        "comment": null,
+        "isregex": true,
+        "enabled": false,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\b([Ee])n\u0123e\\B",
+        "replace": "$1\u0146\u0123e",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\b([Ee])van\u0123\\B",
+        "replace": "$1va\u0146\u0123",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "<!--\\ Bota\\ izveidots\\ nosaukums\\ -->",
+        "replace": null,
+        "comment": null,
+        "isregex": false,
+        "enabled": true,
+        "minor": true,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\b([Vv])[e\u0113]l[\u0101a]k",
+        "replace": "$1\u0113l\u0101k",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": false,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "p\u0113d\u0113jaj",
+        "replace": "p\u0113d\u0113j",
+        "comment": null,
+        "isregex": false,
+        "enabled": true,
+        "minor": false,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\b([Jj])ugendstil",
+        "replace": "$1\u016bgendstil",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": false,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\b([Tt])\u0101llek\u0161an",
+        "replace": "$1\u0101ll\u0113k\u0161an",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": false,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\b([Dd])iplomat(?!ique)",
+        "replace": "$1iplom\u0101t",
+        "comment": null,
+        "isregex": true,
+        "enabled": false,
+        "minor": false,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "([Ss])okr\u0101t",
+        "replace": "$1okrat",
+        "comment": "Sokr\u0101ti\u0146\u0161",
+        "isregex": true,
+        "enabled": true,
+        "minor": false,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\\b([Ss])\u0101lsk\u0101b",
+        "replace": "$1\u0101lssk\u0101b",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": false,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "([Oo])rganiz\u0101t",
+        "replace": "$1rganizat",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": false,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "([Pp])ant\u0113r",
+        "replace": "$1anter",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": false,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "([Oo])ffici\u0101l",
+        "replace": "$1fici\u0101l",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": false,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "([Aa])tiec\u012bb",
+        "replace": "$1ttiec\u012bb",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": false,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "([Aa])rh[eo]lo",
+        "replace": "$1rheolo",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": false,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "relfej",
+        "replace": "reljef",
+        "comment": null,
+        "isregex": false,
+        "enabled": true,
+        "minor": false,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "([Ff])unci",
+        "replace": "$1unkci",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": false,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "([Tt])irznie",
+        "replace": "$1irdznie",
+        "comment": null,
+        "isregex": true,
+        "enabled": true,
+        "minor": false,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "Atr\u0101k",
+        "replace": "\u0100tr\u0101k",
+        "comment": null,
+        "isregex": false,
+        "enabled": true,
+        "minor": false,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "atrak",
+        "replace": "\u0101tr\u0101k",
+        "comment": "pamatraksts",
+        "isregex": false,
+        "enabled": false,
+        "minor": false,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\u0100trak",
+        "replace": "\u0100tr\u0101k",
+        "comment": null,
+        "isregex": false,
+        "enabled": true,
+        "minor": false,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    },
+    {
+        "find": "\u0101trak",
+        "replace": "\u0101tr\u0101k",
+        "comment": "j\u0101trakt\u0113",
+        "isregex": false,
+        "enabled": true,
+        "minor": false,
+        "beforeorafter": false,
+        "regularexpressionoptions": "None"
+    }
+]

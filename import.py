@@ -42,9 +42,7 @@ class Import:
 	def handleDumpScan(self, plugins = ['fnr']):
 		dumpscanner = WikipediaDumpScanner(self.wiki)
 		dumpresults = dumpscanner.scanWiki(self.getDumpScanLink(), plugins)
-		with open('tsting.txt', 'w', encoding='utf8') as f:
-			f.write(str(dumpresults))
-
+		
 		taskTypeGeneral = {
 			'doubleWords': {'main':'repeated','sub':None},
 			'sekojoss': {'main':'typo','sub':'sekojoss'},
