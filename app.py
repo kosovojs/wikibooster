@@ -15,7 +15,9 @@ from tasks.main import Tasks
 from save import Save
 from db import DB
 
-app = Flask(__name__, static_folder="./templates/static", template_folder="./templates")
+from typo.fix import TypoFix
+
+app = Flask(__name__, static_folder="./frontend/build/static", template_folder="./frontend/build")
 #app = Flask(__name__)
 CORS(app)
 
@@ -104,6 +106,23 @@ def listTypos(wiki):
 	db = DB()
 	typos = db.getTyposForWiki(wiki)
 	return jsonify(typos)
+
+
+@app.route('/typo/articles', methods=['GET'])
+def typo_list_for_wiki():
+	db = DB()
+	wiki = 'lvwiki'
+	typos = db.get_typo_articles(wiki)
+	return jsonify(typos)
+
+@app.route('/typo/fix/<article>', methods=['GET'])
+def fix_typos(article):
+	db = DB()
+	typoFixer = TypoFix()
+
+	res = typoFixer.getData('lvwiki', article, db)
+
+	return jsonify(res)
 
 @app.route('/rules/<wiki>', methods=['GET'])
 def listRules(wiki):

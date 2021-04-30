@@ -20,7 +20,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const setWikiLanguages = () => {
 	return function (dispatch, getState) {
-		
+
 		return fetch(`${urlendpoint}wikis`)
 			.then(
 				response => response.json(),

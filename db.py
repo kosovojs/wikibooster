@@ -17,7 +17,7 @@ class DB:
 
 		self.loadConfig()
 		self.connectTools()
-		
+
 	def loadConfig(self):
 		__dir__ = os.path.dirname(__file__)
 
@@ -32,7 +32,7 @@ class DB:
 		self.password = configuration['PASSWORD'] if 'PASSWORD' in configuration else ''
 		self.database = configuration['DATABASE'] if 'DATABASE' in configuration else 's53957__dev_p'
 		self.defaultFile = configuration['DEFAULT_FILE'] if 'DEFAULT_FILE' in configuration else os.path.expanduser("~/replica.my.cnf")
-		
+
 	def connectTools(self):
 		if self.isDev:
 			self.conn = pymysql.connect(db=self.database, user=self.user, passwd=self.password, host=self.host, port=self.port, charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
@@ -61,17 +61,29 @@ class DB:
 
 		return rows
 	#
+	def get_typo_articles(self, wiki):
+		sql = "SELECT distinct article from typos_2021_booster where completion_date IS NULL"
+		results = self.run_query(sql)
+
+		return [f['article'] for f in results]
+
+	def get_typo_replacements(self):
+		sql = "SELECT search_for as `from`, replace_with as `to`, match_whole_word from typo where is_active_2021=1"
+		results = self.run_query(sql)
+
+		return results
+
 	def getWikiRules(self, wiki):
 		sql = "SELECT rule_object, rule, result from rules where wiki=%s"
 		results = self.run_query(sql, str(wiki))
-		
+
 		return results
 	#
 	def get_articles_for_task(self, wiki, task):
 		sql = "SELECT article_name FROM article_list WHERE task=%s AND completion_date IS NULL"
 		results = self.run_query(sql, str(task))
 		results = [f['article_name'] for f in results]
-		
+
 		return results
 	#
 	def getCurrentArticlesForImport(self, task):
@@ -79,7 +91,7 @@ class DB:
 		# OR result<>''
 		results = self.run_query(sql, str(task))
 		results = [f['article_name'] for f in results]
-		
+
 		return results
 
 	def getTaskID(self, wiki, taskName, subtaskName = None):
@@ -100,7 +112,7 @@ class DB:
 		#	sql += " ORDER BY RAND()"
 		results = self.run_query(sql, (task_id,lastID))
 		results = [f['article_name'] for f in results]
-		
+
 		return results
 
 	def getTaskIdsForWiki(self,wiki):
@@ -110,29 +122,29 @@ class DB:
 			results = [f['url_id'] for f in results]
 		else:
 			return []
-		
+
 		return results
 
 	def getTasksForWiki(self,wiki):
 		sql = "SELECT url_id, nav_title, task, description, (SELECT 1 FROM article_list WHERE task=tasks.id AND completion_date IS NULL LIMIT 1) AS hasArticles FROM tasks where wiki=%s and active=1"
 		results = self.run_query(sql, (wiki))
-		
+
 		return results
 
 	def getTyposForWiki(self,wiki,idFilter=False):
 		if idFilter:
-			sql = "SELECT id, name, search_for,replace_with, `comment`, is_regex as regex, case_sensitive AS `case`, match_whole_word as whole, active, dont_search_dump dumpsearch, is_minor as minor, test_cases FROM typo where wiki=%s and id=%s"
+			sql = "SELECT id, name, search_for,replace_with, `comment`, is_regex as regex, case_sensitive AS `case`, match_whole_word as whole, is_active_2021 as active, dont_search_dump dumpsearch, is_minor as minor, test_cases FROM typo where wiki=%s and id=%s"
 			results = self.run_query(sql, (wiki,idFilter))[0]
 		else:
-			sql = "SELECT id, name, search_for,replace_with, `comment`, is_regex as regex, case_sensitive AS `case`, match_whole_word as whole, active, dont_search_dump dumpsearch, is_minor as minor, test_cases FROM typo where wiki=%s"
+			sql = "SELECT id, name, search_for,replace_with, `comment`, is_regex as regex, case_sensitive AS `case`, match_whole_word as whole, is_active_2021 as active, dont_search_dump dumpsearch, is_minor as minor, test_cases FROM typo where wiki=%s"
 			results = self.run_query(sql, (wiki))
-			
+
 		return results
-	
+
 	def getRulesForWiki(self, wiki):
 		sql = "SELECT id, wiki, rule_name, rule_object, rule, result FROM rules where wiki=%s"
 		results = self.run_query(sql, (wiki))
-		
+
 		return results
 
 	def saveRule(self,id, wiki, rule_name, rule_object, rule, result):
@@ -155,14 +167,14 @@ class DB:
 		if id==0:
 			currTime = self.getCurrentTime()
 
-			sqlTemplate = "insert into typo (name,search_for,replace_with,`comment`,is_regex,case_sensitive,match_whole_word,active,dont_search_dump,is_minor, wiki, addition_date, user_added) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+			sqlTemplate = "insert into typo (name,search_for,replace_with,`comment`,is_regex,case_sensitive,match_whole_word,is_active_2021,dont_search_dump,is_minor, wiki, addition_date, user_added) values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
 			self.cursor.execute(sqlTemplate, (name, search_for, replace_with, comment, regex, case, whole, active, dumpsearch, minor, wiki, currTime,user))
 			self.conn.commit()
 
 			id = self.run_query('SELECT LAST_INSERT_ID() as id')[0]['id']
-			
+
 		else:
-			sqlTemplate = "update typo set name=%s, search_for=%s,replace_with=%s, `comment`=%s, is_regex=%s, case_sensitive=%s, match_whole_word=%s, active=%s, dont_search_dump=%s, is_minor=%s where id=%s"
+			sqlTemplate = "update typo set name=%s, search_for=%s,replace_with=%s, `comment`=%s, is_regex=%s, case_sensitive=%s, match_whole_word=%s, is_active_2021=%s, dont_search_dump=%s, is_minor=%s where id=%s"
 
 			self.cursor.execute(sqlTemplate, (name, search_for, replace_with, comment, regex, case, whole, active, dumpsearch, minor, id))
 			self.conn.commit()
@@ -185,39 +197,39 @@ class DB:
 			results = [f['id'] for f in results][0]
 		else:
 			return 0
-		
+
 		return results
 
 	def saveStatus(self,task_id,pageTitle, result, user):
 		currTime = self.getCurrentTime()
-		
+
 		sql = "update article_list set completion_date=%s, result=%s, user=%s where article_name=%s and task=%s and completion_date IS NULL"
 
 		affected_rows = self.cursor.execute(sql, (currTime, result, user, pageTitle, task_id))
 		self.conn.commit()
-		
+
 		return affected_rows
 
 	def getAvailableWikis(self):
 		sql = "SELECT distinct wiki FROM tasks where active=1 ORDER BY wiki"
 		results = self.run_query(sql, ())
-		
+
 		return [f['wiki'] for f in results]
 
 	def getTaskEditSummary(self, task):
 		sql = "SELECT edit_summary FROM tasks WHERE id=%s"
 		results = self.run_query(sql, str(task))
-		
+
 		return results[0]['edit_summary']
 
 	def getTaskType(self, task):
 		sql = "SELECT task_type FROM tasks WHERE id=%s"
 		results = self.run_query(sql, str(task))
-		
+
 		return results[0]['task_type']
 
 	def getTaskSubtype(self, task):
 		sql = "SELECT task_subtype FROM tasks WHERE id=%s"
 		results = self.run_query(sql, str(task))
-		
+
 		return results[0]['task_subtype']

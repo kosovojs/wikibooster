@@ -41,7 +41,13 @@ const handleArticleSet = (cb) => {
 		const articleTitle = state.tasks.currentArticle.name;
 		const lang = state.app.wiki;
 
-		return fetch(`${urlendpoint}task/${lang}/${currTask}/${articleTitle}`)
+		let url = `${urlendpoint}task/${lang}/${currTask}/${articleTitle}`;
+
+		if (currTask === 101) {
+			url = `${urlendpoint}typo/fix/${articleTitle}`;
+		}
+
+		return fetch(url)
 			.then(
 				response => response.json(),
 				error => console.log('An error occurred.', error)

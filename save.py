@@ -15,23 +15,10 @@ class Save:
 			self.csrf_token = ''
 
 	def makeSummary(self,taskID, summaryDB):
-		finalSummary = ''
-		mapping = {
-			'1':'pievienots DEFAULTSORT',
-			'2':'divi vienādi vārdi pēc kārtas',
-			'3':'labots typo (sekojošais)',
-			'4':'labots typo (nākošais)',
-			'6':'pievienota {{reflist}} veidne',
-			'7':'two repeated words',
-			'8':'added DEFAULTSORT',
-			'10':'added {{reflist}} template'
-		}
 		if summaryDB:
-			finalSummary = summaryDB + ' ([[toollabs:booster|booster]])'
-		else:
-			finalSummary = 'edit made with [[toollabs:booster|booster]] tool'
+			return summaryDB + ' ([[toollabs:booster|booster]])'
 
-		return finalSummary
+		return 'edit made with [[toollabs:booster|booster]] tool'
 
 	def doSaveAction(self, article, wikitext, task, editSummary):
 		summary = self.makeSummary(task, editSummary)
@@ -46,7 +33,7 @@ class Save:
 					'maxlag': 5,
 					'formatversion': 2
 		}
-		
+
 		try:
 			params = params
 			response = self.session.post(**params)
@@ -72,5 +59,5 @@ class Save:
 		#task_id,pageID, result, user
 		if affectedRows == 1:
 			return {'status':'ok','message':'saved'}
-		
+
 		return {'status':'info','message':'no data to save'}
