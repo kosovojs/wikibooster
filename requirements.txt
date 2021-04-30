@@ -13,7 +13,6 @@ mwapi==0.5.1
 mwoauth==0.3.3
 mwparserfromhell==0.5.3
 oauthlib==3.0.1
-pkg-resources==0.0.0
 PyJWT==1.7.1
 PyMySQL==0.9.3
 pywikibot==3.0.20200326
@@ -25,3 +24,4 @@ soupsieve==1.9.1
 toolforge==4.2.0
 urllib3==1.24.1
 Werkzeug==0.15.1
+regex
