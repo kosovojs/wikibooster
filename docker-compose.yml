@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+  booster:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    volumes:
+      - .:/app
+    ports:
+      - 5000:5000
+    command: flask run --port 5000  --host 0.0.0.0
