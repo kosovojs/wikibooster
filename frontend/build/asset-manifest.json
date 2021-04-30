@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/booster/static/css/main.fca3b1d7.chunk.css",
+    "main.js": "/booster/static/js/main.5512f18a.chunk.js",
+    "main.js.map": "/booster/static/js/main.5512f18a.chunk.js.map",
+    "runtime~main.js": "/booster/static/js/runtime~main.9b0b7339.js",
+    "runtime~main.js.map": "/booster/static/js/runtime~main.9b0b7339.js.map",
+    "static/css/2.5d00fa23.chunk.css": "/booster/static/css/2.5d00fa23.chunk.css",
+    "static/js/2.8960a752.chunk.js": "/booster/static/js/2.8960a752.chunk.js",
+    "static/js/2.8960a752.chunk.js.map": "/booster/static/js/2.8960a752.chunk.js.map",
+    "index.html": "/booster/index.html",
+    "precache-manifest.aa54c631e2daa960e2ed37990be8907d.js": "/booster/precache-manifest.aa54c631e2daa960e2ed37990be8907d.js",
+    "service-worker.js": "/booster/service-worker.js",
+    "static/css/2.5d00fa23.chunk.css.map": "/booster/static/css/2.5d00fa23.chunk.css.map",
+    "static/css/main.fca3b1d7.chunk.css.map": "/booster/static/css/main.fca3b1d7.chunk.css.map",
+    "static/media/brands.css": "/booster/static/media/fa-brands-400.f7307680.woff2",
+    "static/media/solid.css": "/booster/static/media/fa-solid-900.e8a427e1.woff2"
+  }
+}
