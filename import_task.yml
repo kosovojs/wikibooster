@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: booster.import
+  labels:
+    name: booster.import
+    toolforge: tool
+spec:
+  template:
+    metadata:
+      labels:
+        toolforge: tool
+    spec:
+      containers:
+      - name: bot
+        image: docker-registry.tools.wmflabs.org/toolforge-python37-sssd-base:latest
+        command: [ '/bin/sh', '-c' ]
+        args:
+          - ./import.sh
+        workingDir: /data/project/booster
+        env:
+          - name: HOME
+            value: /data/project/booster
+      restartPolicy: Never
+  backoffLimit: 4

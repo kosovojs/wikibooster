@@ -6,7 +6,7 @@ from importer.defaultsort import DefaultSortSetup
 from importer.reflist import ReflistSetup
 
 class Import:
-	
+
 	def __init__(self, wiki, date):
 		self.db = DB()
 		self.wiki = wiki
@@ -32,7 +32,7 @@ class Import:
 		#for taskType in dumpresults:
 		self.db.saveArticlesInDatabase(self.handleArticleRemoval(dumpresults, 'defaultsort'))
 		#print(dumpresults)
-		
+
 	def handleReflistImport(self):
 		dumpscanner = ReflistSetup(self.wiki)
 		dumpresults = dumpscanner.scanWiki()
@@ -42,24 +42,24 @@ class Import:
 	def handleDumpScan(self, plugins = ['fnr']):
 		dumpscanner = WikipediaDumpScanner(self.wiki)
 		dumpresults = dumpscanner.scanWiki(self.getDumpScanLink(), plugins)
-		
+
 		taskTypeGeneral = {
 			'doubleWords': {'main':'repeated','sub':None},
 			'sekojoss': {'main':'typo','sub':'sekojoss'},
 			'nakosais': {'main':'typo','sub':'nakosais'},
 			'kimija': {'main':'typo','sub':'kimija'}
 		}
-		
+
 		for taskType in dumpresults:
 			if taskType == 'reflist':
-				
+
 				filtered = self.handleArticleRemoval(dumpresults[taskType], 'reflist', None, True)
 				self.db.saveArticlesInDatabase(filtered)
 			else:
 				finalType = taskTypeGeneral[taskType]
 				dataForDB = self.handleArticleRemoval(dumpresults[taskType], finalType['main'], finalType['sub'], True)
 				self.db.saveArticlesInDatabase(dataForDB)
-				
+
 		#print(dumpresults)
 		#self.db.saveArticlesInDatabase(dumpresults)
 
@@ -69,7 +69,7 @@ class Import:
 		self.handleDumpScan(['fnr'])
 
 	def main_et(self):
-		#self.handleDefaultsortImport()
+		self.handleDefaultsortImport()
 		#self.handleReflistImport()
 		self.handleDumpScan(['fnr','reflist'])
 
@@ -81,11 +81,11 @@ class Import:
 #importObj = Import('lvwiki')
 #importObj.main()
 
-""" importObj = Import('lvwiki','20191001')
-importObj.main_lv() """
+importObj = Import('lvwiki','20210420')
+importObj.main_lv()
 
-#importObj = Import('etwiki','20190901')
-#importObj.main_et()
+importObj = Import('etwiki','20210420')
+importObj.main_et()
 
-importObj = Import('svwiki','20191001')
-importObj.main_sv()
+#importObj = Import('svwiki','20191001')
+#importObj.main_sv()
